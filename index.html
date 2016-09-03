@@ -4,48 +4,50 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
 
-<script type="text/javascript">
-    var strCancel = 'Anuleaza';    var changeStr = 'modifica';    var compareMsg = new Array('Poti compara maxim 4 produse!', 'Va rugam sa selectati cel putin 2 produse');
-    var closeStr = 'Inchide';    var static_url = '';
-    var supermarketMessages =
-    {
-        'qty_chars':'Cantitatea introdusă trebuie<br />să conțină caractere de la 0 la 9',
-        'qty_max':'Cantitatea maximă este',
-        'qty_min':'Cantitatea minimă este',
-        'qty_between':'Cantitatea introdusă trebuie<br />să fie între',
-        'qty_incorrect':'Cantitatea aleasă de tine nu poate fi comandată.<br />Pentru o alegere corectă a cantității<br />te rugăm să folosești butoanele "-" sau "+"',
-        'qty_predefined':'Cantitatea introdusă trebuie să fie una din valorile:<br />',
-        'qty_and':'și',
-        'added_success':'Produsele au fost<br />adăugate în coș',
-        'transport_active':'Livrare prin curier',
-        'transport_inactive':'In curând in zona ta',
-        'pickup_active':'Ridicare din magazin',
-        'pickup_inactive':'Indisponibil'
-    };
-    var EmgAddressUrl = "https://www.emag.ro/user/ajax/editAddressForm";
+    <script type="text/javascript">
+        var strCancel = 'Anuleaza';    var changeStr = 'modifica';    var compareMsg = new Array('Poti compara maxim 4 produse!', 'Va rugam sa selectati cel putin 2 produse');
+        var closeStr = 'Inchide';    var static_url = '';
+        var supermarketMessages =
+        {
+            'qty_chars':'Cantitatea introdusă trebuie<br />să conțină caractere de la 0 la 9',
+            'qty_max':'Cantitatea maximă este',
+            'qty_min':'Cantitatea minimă este',
+            'qty_between':'Cantitatea introdusă trebuie<br />să fie între',
+            'qty_incorrect':'Cantitatea aleasă de tine nu poate fi comandată.<br />Pentru o alegere corectă a cantității<br />te rugăm să folosești butoanele "-" sau "+"',
+            'qty_predefined':'Cantitatea introdusă trebuie să fie una din valorile:<br />',
+            'qty_and':'și',
+            'added_success':'Produsele au fost<br />adăugate în coș',
+            'transport_active':'Livrare prin curier',
+            'transport_inactive':'In curând in zona ta',
+            'pickup_active':'Ridicare din magazin',
+            'pickup_inactive':'Indisponibil'
+        };
+        var EmgAddressUrl = "https://www.emag.ro/user/ajax/editAddressForm";
 
-    // config vars for autocomplete
-    var translation_config = {
-        "brand.headline"       : "Sugestii brand",
-        "searchTerm.headline"  : "Alţi termeni sugeraţi",
-        "productName.headline" : "Sugestii produse",
-        "category.headline"    : "Categorii sugerate",
-        "category"             : "Categorie",
-        "productName"          : "Produs",
-        "unspecified"          : "Nespecificat",
-        "brand"                : "Brand",
-        "content"              : "Conţinut",
-        "searchTerm"           : "Termen căutat",
-        "inCategory"           : "în",
-        "relevantProducts"     : "produse relevante",
-        "relevantSuggestions"  : "cuvinte/categorii relevante",
-        "numberOfProducts"     : "rezultate"
-    };
-</script>
+        // config vars for autocomplete
+        var translation_config = {
+            "brand.headline"       : "Sugestii brand",
+            "searchTerm.headline"  : "Alţi termeni sugeraţi",
+            "productName.headline" : "Sugestii produse",
+            "category.headline"    : "Categorii sugerate",
+            "category"             : "Categorie",
+            "productName"          : "Produs",
+            "unspecified"          : "Nespecificat",
+            "brand"                : "Brand",
+            "content"              : "Conţinut",
+            "searchTerm"           : "Termen căutat",
+            "inCategory"           : "în",
+            "relevantProducts"     : "produse relevante",
+            "relevantSuggestions"  : "cuvinte/categorii relevante",
+            "numberOfProducts"     : "rezultate"
+        };
+    </script>
+
 	<script type="text/javascript" src="./index_files/homepage.js"></script>
 	<script type="text/javascript" src="./index_files/custom-select.js"></script>
 </head>
 <body>
+
     <script type="text/ng-template" id="pages/blog.html">
       <h1>Blog</h1>
       <h3>{{message}}</h3>
