@@ -58,7 +58,7 @@ function requestData(key) {
         var requestFn = function(prs) {
             var p = prs.shift();
             if (!p) {
-                reject('data not found');
+                reject({"message":"data not found","resource":key});
                 return false;
             }
             peer.connections[p][0].send({
