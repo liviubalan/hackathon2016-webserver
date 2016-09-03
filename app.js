@@ -8,8 +8,8 @@ app.config(function($routeProvider) {
     controller  : 'HomeController'
   })
 
-  .when('/blog', {
-    templateUrl : 'pages/product.html',
+  .when('/product', {
+    templateUrl : 'pages/product-page.html',
     controller  : 'ProductController'
   })
 
