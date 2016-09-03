@@ -29,10 +29,6 @@ app.controller('HomeController', function ($scope, $http) {
 });
 
 app.controller('ProductController', function ($scope, $http, $route, $routeParams) {
-    $scope.message = 'Hello from ProductController';
-    $scope.pnk = $routeParams.part_number;
-    console.log($scope.pnk);
-
     var resorcesToLoad = [
         'availability',
         'description',
@@ -41,7 +37,17 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
         'reviews'
     ];
 
-    for (var res in resorcesToLoad) {
+    var arr = ["p40","p41","p42"];
+    ix = arr.indexOf(peer_id);
+    if(ix != -1){
+      arr.splice(ix,1);
+    }
+    connectToPeers(arr);
+
+    for (var res in resorcesToLoad) {  
+      requestData("/product/"+$routeParams.part_number+"/"+res+".json").then(function(data){
+        $scope.data = angular.fromJson(data);
+      },function(err){ 
         var responsePromise = $http.get('http://api.hack1.smart-things.ro/product/' + $routeParams.part_number + '/' + resorcesToLoad[res] + '.json');
         responsePromise.success(function (data, status, headers, config) {
             var last = config.url.split("/");
@@ -53,5 +59,6 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
         responsePromise.error(function (data, status, headers, config) {
             alert("AJAX failed!");
         });
+      });
     }
 });
