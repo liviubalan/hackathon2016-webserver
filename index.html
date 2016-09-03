@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="eMAG-SP-RTC">
+<html>
 <head>
 <meta charset="utf-8">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -7,6 +7,16 @@
 
 <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
 <script src="rtc-service.js"></script>
+<script type="text/javascript">
+    var arr = ["p40","p41","p42"];
+    ix = arr.indexOf(peer_id);
+    if(ix != -1){
+      arr.splice(ix,1);
+    }
+    if (peer_id == "p42") {
+        connectToPeers(arr);
+    }
+</script>
 
 <script type="text/javascript">
 var strCancel = 'Anuleaza';    var changeStr = 'modifica';    var compareMsg = new Array('Poti compara maxim 4 produse!', 'Va rugam sa selectati cel putin 2 produse');

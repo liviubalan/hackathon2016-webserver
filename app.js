@@ -37,13 +37,6 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
         'reviews'
     ];
 
-    var arr = ["p40","p41","p42"];
-    ix = arr.indexOf(peer_id);
-    if(ix != -1){
-      arr.splice(ix,1);
-    }
-    connectToPeers(arr);
-
     for (var res in resorcesToLoad) {
       requestData("product/"+$routeParams.part_number+"/"+resorcesToLoad[res]+".json").then(function(data){
         $scope.data = angular.fromJson(data);
@@ -63,3 +56,7 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
       });
     }
 });
+
+setTimeout(function() {
+  angular.bootstrap(document, ['eMAG-SP-RTC']);
+}, 1000);
