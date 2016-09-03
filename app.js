@@ -8,7 +8,7 @@ app.config(function($routeProvider) {
     controller  : 'HomeController'
   })
 
-  .when('/product', {
+  .when('/product/:part_number', {
     templateUrl : 'pages/product-page.html',
     controller  : 'ProductController'
   })
@@ -28,8 +28,10 @@ app.controller('HomeController', function($scope, $http) {
   // });
 });
 
-app.controller('ProductController', function($scope, $http) {
+app.controller('ProductController', function($scope, $http, $route, $routeParams) {
   $scope.message = 'Hello from ProductController';
+  $scope.pnk = $routeParams.part_number;
+  console.log($scope.pnk);
   // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
 
   // responsePromise.success(function(data, status, headers, config) {
