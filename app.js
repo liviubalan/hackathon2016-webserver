@@ -18,24 +18,24 @@ app.config(function($routeProvider) {
 
 app.controller('HomeController', function($scope, $http) {
   $scope.message = 'Hello from HomeController';
-  var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
+  // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
 
-  responsePromise.success(function(data, status, headers, config) {
-      $scope.data = data;
-  });
-  responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-  });
+  // responsePromise.success(function(data, status, headers, config) {
+  //     $scope.data = data;
+  // });
+  // responsePromise.error(function(data, status, headers, config) {
+  //     alert("AJAX failed!");
+  // });
 });
 
 app.controller('ProductController', function($scope, $http) {
   $scope.message = 'Hello from ProductController';
-  var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
+  // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
 
-  responsePromise.success(function(data, status, headers, config) {
-      $scope.data = data;
-  });
-  responsePromise.error(function(data, status, headers, config) {
-      alert("AJAX failed!");
-  });
+  // responsePromise.success(function(data, status, headers, config) {
+  //     $scope.data = data;
+  // });
+  // responsePromise.error(function(data, status, headers, config) {
+  //     alert("AJAX failed!");
+  // });
 });
