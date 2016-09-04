@@ -853,7 +853,6 @@ $(document).ready(function () {
 
     loginTooltipShown = $.cookie('loginTooltipShown');
     if (!loginTooltipShown) {
-        $(document).on('click', onLoginTooltipNotShown);
         tooltipConfigObject.trigger = 'instant';
         tooltipConfigObject.instantTriggerTimeout = 0;
         tooltipConfigObject.beforeCallbackTriggerOnce = true;
