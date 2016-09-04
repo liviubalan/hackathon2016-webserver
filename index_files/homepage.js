@@ -1224,8 +1224,3 @@ function instantiateCarousel() {
                             timeOut: 3000
                         }
                 );
-
-
-setTimeout(function(){
-	$('body').css('left','0').css('position','relative');
-},1000);

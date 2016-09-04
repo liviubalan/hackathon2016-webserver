@@ -26,8 +26,8 @@ app.controller('HomeController', function ($scope, $http) {
     //     alert("AJAX failed!");
     // });
 
-
     loadScript("index_files/homepage.js");
+    loadScript("index_files/custom-select.js");
 });
 
 app.controller('ProductController', function ($scope, $http, $route, $routeParams) {
@@ -62,6 +62,18 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
 setTimeout(function() {
   angular.bootstrap(document, ['eMAG-SP-RTC']);
 }, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
 
 //==========================================================
 function loadScript(url, callback)
