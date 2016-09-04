@@ -14,19 +14,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
 
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+  var socket = io('http://hack2.smart-things.ro:8001');
+  socket.on('news', function (data) {
+    peer_id = data.peer_id;
+    var peer_list = data.peer_list;
+    console.log(peer_id);
+    console.log(peer_list);
+    rtcInit(peer_id);
+    connectToPeers(peer_list);
+  });
+  socket.on('update', function (data) {
+    console.log('updating peers...');
+    connectToPeers(data.peer_list);
+  });
+</script>
+
 <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
 <script src="rtc-service.js"></script>
-<script type="text/javascript">
-    var arr = ["p40","p41","p42"]; // @todo: get connections from server
-    ix = arr.indexOf(peer_id);
-    if(ix != -1){
-      arr.splice(ix,1);
-    }
-    if (peer_id == 'p42') {
-        connectToPeers(arr);
-    }
-    
-</script>
 </head>
 <body>
     <div ng-view></div>

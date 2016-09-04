@@ -2,6 +2,7 @@ var localData = {};
 var requestStatus = {};
 var query = getQueryParams(document.location.search);
 var peer_id = query.p || 'p1';
+var peer = null;
 
 function rtcInit(peerId) {
     peer = new Peer(peerId, {key: '7c5tmjerk7ec23xr'});
@@ -17,7 +18,6 @@ function rtcInit(peerId) {
         });
     });
 }
-rtcInit(peer_id);
 
 var onDataCallback = function(data) {
     if (data.action == 'get' && data.key) {
