@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="utf-8">
-    <title>{{pageTitle}}</title>
+    <title>{{description.page_title}}</title>
     <meta http-equiv="Content-Language" content="ro">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -911,7 +911,7 @@
                                                              style="transition: none; transform: translate3d(0px, 0px, 0px);">
                                                             <li class="thumbnail-wrapper ph-card" data-ph-id="image-0">
                                                                 <a href="{{description.product_url}}" class="thumbnail product-gallery-image">
-                                                                    <img src="{{description.product_image}}"
+                                                                    <img ng-src="{{description.product_image}}"
                                                                          alt="Tablete Finish All in One, 56 buc, 1041 g">
                                                                 </a>
                                                             </li>
@@ -1059,13 +1059,13 @@
 
                                                     <div class="product-highlight product-page-pricing hidden-xs hidden-sm">
 
-                                                        <p class="product-old-price">79<sup>99</sup> <span>Lei</span>
-                                                        </p>
-                                                        <p class="product-this-deal">
-                                                            Economisesti 42% </p>
-                                                        <p class="product-new-price">
-                                                            {{price.price | currency}}<sup>99</sup> <span>Lei</span>
-                                                        </p>
+
+                                                        <span ng-bind-html="renderHtml(price.old_price | price:'product-old-price')"></span>
+
+                                                        <p class="product-this-deal" ng-show="price.discount">Economisesti {{price.discount}}{{price.discount_type}} </p>
+
+                                                        <span ng-bind-html="renderHtml(price.price | price:'product-new-price')"></span>
+
 
                                                         <span class="label label-in_stock">{{ availability.label }}</span>
                                                     </div>
@@ -1125,438 +1125,55 @@
                          class="ph-widget ph-carousel product-carousel ph-at-begin ph-has-arrows ph-has-dots">
                         <div class="ph-scroller">
                             <div class="ph-body" style="transition: none; transform: translate3d(0px, 0px, 0px);">
-                                <div class="card-item ph-card"><a
-                                        href="/tablete-finish-quantum-20-buc-430-g-5011417549193/pd/DHK7QBBBM/?ref=similar-exp_center-1_1"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720048/images/res_244bd0e1873c0ce6e31415aa0ede23bd_150x150_5aq3.jpg"
-                                                    alt="Tablete Finish Quantum, 20 buc, 430 g"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Tablete Finish Quantum, 20 buc, 430
-                                        g </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 49<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-46%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 26<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/sare-pentru-masina-de-spalat-vase-1-5-kg-7785780/pd/D4VJYMBBM/?ref=similar-exp_center-1_2"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/1000/999056/images/res_221ca447060bbee129ff2e633a26f907_150x150_opaq.jpg"
-                                                    alt="Sare pentru masina de spalat vase, 1,5 kg"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Sare pentru masina de spalat vase,
-                                        1,5 kg </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 22<sup>00</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-10%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 19<sup>68</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/detergent-de-vase-finish-all-in-one-28-tablete-solutie-de-curatare-gratis-250-ml-5949031305799/pd/D9PYZYBBM/?ref=similar-exp_center-1_3"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/2505/2504752/images/res_4a7a9a66c0c2f8aa6b4697d0f6ebd465_150x150_c1t1.jpg"
-                                                    alt="Detergent de vase Finish All in one, 28 tablete + Solutie de curatare gratis, 250 ml">
+
+
+                                <div class="card-item ph-card" ng-repeat="item in gallery.similar_products">
+                                    <a href="{{item.product_url}}" class="card">
+                                        <div class="preloader hidden"></div>
+                                        <div class="postloader hidden"></div>
+                                        <div class="card-heading">
+                                            <div class="thumbnail-wrapper">
+                                                <div class="thumbnail">
+                                                    <img ng-src="{{item.product_image}}" alt="{{item.product_title}}">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Detergent de vase Finish All in
-                                        one, 28 tablete + Solutie de curatare gratis, 250 ml </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 100%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
+                                        <div class="card-body">
+                                            <p class="product-title">
+                                                {{item.product_title}}
+                                            </p>
                                         </div>
-                                        <div class="rating-count font-size-sm"> 5.00 (2)</div>
-                                        <p class="product-old-price"><s> 49<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-30%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 34<sup>63</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/tablete-finish-quantum-40-buc-830-g-5011417548110/pd/DTK7QBBBM/?ref=similar-exp_center-1_4"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720044/images/res_e3f2348ee6e698c9b1465e651f628d06_150x150_e5i4.jpg"
-                                                    alt="Tablete Finish Quantum, 40 buc, 830 g"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Tablete Finish Quantum, 40 buc, 830
-                                        g </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 100%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 5.00 (1)</div>
-                                        <p class="product-old-price"><s> 79<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-45%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 43<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/detergent-de-vase-finish-all-in-one-powerball-28-pastile-12-gratis-5011417562970/pd/DQ317YBBM/?ref=similar-exp_center-1_5"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/2019/2018217/images/res_facc36ad15992ca0af3e2607afff6e62_150x150_m85t.jpg"
-                                                    alt="Detergent de vase Finish All in one Powerball, 28 pastile+12 gratis">
+
+                                        <div class="card-body">
+                                            <div class="star-rating star-rating-sm">
+                                                <ul class="star-rating-inner">
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                </ul>
+                                                <ul class="star-rating-inner star-rating-active" style="width: {{item.feedback_rating*20}}%;">
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                    <li><span class="em em-star_fill"></span></li>
+                                                </ul>
                                             </div>
+
+                                            <span ng-bind-html="renderHtml(item.old_price | price:'product-old-price':'strike':item.feedback_rating)"></span>
+
+                                            <span ng-bind-html="renderHtml(item.price | price:'product-new-price')"></span>
+
                                         </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Detergent de vase Finish All in one
-                                        Powerball, 28 pastile+12 gratis </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 100%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 5.00 (1)</div>
-                                        <p class="product-old-price"><s> 49<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-30%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 34<sup>63</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/tablete-finish-quantum-lemon-40-buc-830-g-8410104222505/pd/DKK7QBBBM/?ref=similar-exp_center-1_6"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720045/images/res_85dba940f4b4fd1c3fc15e66fc40ec22_150x150_dqbd.jpg"
-                                                    alt="Tablete Finish Quantum, Lemon, 40 buc, 830 g"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Tablete Finish Quantum, Lemon, 40
-                                        buc, 830 g </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 79<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-10%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 71<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/capsule-vase-fairy-all-in-1-26buc-4015600581848/pd/ELYZNBBBM/?ref=similar-exp_center-1_7"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/73/72470/images/img289344_21052013171152_0_150x150_s4do.jpg"
-                                                    alt="Capsule vase Fairy All-in-1 26buc"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Capsule vase Fairy All-in-1
-                                        26buc </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 60%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 3.00 (1)</div>
-                                        <p class="product-old-price"><s> 35<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-44%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 19<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/tablete-finish-all-in-one-14-buc-288-g-8690570518245/pd/D3K7QBBBM/?ref=similar-exp_center-1_8"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720040/images/res_05be23d402553258d58e1f96a769d295_150x150_hu1l.jpg"
-                                                    alt="Tablete Finish All in One, 14 buc, 288 g"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Tablete Finish All in One, 14 buc,
-                                        288 g </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 25<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-34%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 16<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/tablete-finish-classic-lemon-36-buc-5949031305058/pd/D3RV5MBBM/?ref=similar-exp_center-1_9"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/1717/1716163/images/res_878d5ea049ea99f7871760e6af9305a9_150x150_c4je.jpg"
-                                                    alt="Tablete Finish Classic Lemon, 36 buc"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Tablete Finish Classic Lemon, 36
-                                        buc </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 45<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-43%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 25<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/finish-all-in-1-max-51-tabs-5011417563540/pd/DP5G03BBM/?ref=similar-exp_center-1_10"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/3098/3097160/images/res_1e01252ecd79cc0b9cca186ecb165795_150x150_amul.jpg"
-                                                    alt="Finish All In 1 Max, 51 Tabs"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Finish All In 1 Max, 51 Tabs </p>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 79<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-43%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 44<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/solutie-pentru-curatat-masina-de-spalat-vase-finish-250-ml-8594002680138/pd/D9K7QBBBM/?ref=similar-exp_center-1_11"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720051/images/res_94bf4913c61fe7dc68895308796c4fab_150x150_mr2t.jpg"
-                                                    alt="Solutie pentru curatat masina de spalat vase Finish 250 ml">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Solutie pentru curatat masina de
-                                        spalat vase Finish 250 ml </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 96.6%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 4.83 (6)</div>
-                                        <p class="product-old-price"><s> 29<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-36%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 18<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/finish-all-in-one-max-72-tablets-5997321732794/pd/DB5G03BBM/?ref=similar-exp_center-1_12"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/3098/3097148/images/res_3545547c93f5ddb55d0a3f7893119c7c_150x150_5rke.jpg"
-                                                    alt="Finish All In One Max, 72 Tablets"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Finish All In One Max, 72
-                                        Tablets </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 89<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-41%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 52<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/sare-speciala-pentru-masina-de-spalat-vase-finish-1-5-kg-8594002682736/pd/DXK7QBBBM/?ref=similar-exp_center-1_13"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720050/images/res_d14c7f1875dd40e0fafdabc5c4a7189d_150x150_cs4e.jpg"
-                                                    alt="Sare speciala pentru masina de spalat vase Finish 1.5 kg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Sare speciala pentru masina de
-                                        spalat vase Finish 1.5 kg </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 100%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 5.00 (2)</div>
-                                        <p class="product-old-price"><s> 14<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-40%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 8<sup>99</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/gel-finish-all-in-one-max-lemon-650-ml-8002910039851/pd/DX0Q22BBM/?ref=similar-exp_center-1_14"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/3837/3836635/images/res_f47bce7bb8e21bcaef940ebef75a6d3f_150x150_2taf.jpg"
-                                                    alt="Gel Finish All in One Max Lemon, 650 ml"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Gel Finish All in One Max Lemon,
-                                        650 ml </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm"></div>
-                                        <p class="product-old-price"><s> 45<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-10%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 41<sup>39</sup> <span>Lei</span></p></div>
-                                </a></div>
-                                <div class="card-item ph-card"><a
-                                        href="/solutie-de-clatire-pentru-masina-de-spalat-vase-finish-800-ml-5011417552926/pd/DFK7QBBBM/?ref=similar-exp_center-1_15"
-                                        class="card">
-                                    <div class="preloader hidden"></div>
-                                    <div class="postloader hidden"></div>
-                                    <div class="card-heading">
-                                        <div class="thumbnail-wrapper">
-                                            <div class="thumbnail"><img
-                                                    src="https://s0emagst.akamaized.net/products/721/720052/images/res_56651382dd98d4cabaa1a37b5b0c478e_150x150_lglb.jpg"
-                                                    alt="Solutie de clatire pentru masina de spalat vase Finish 800 ml">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body"><p class="product-title"> Solutie de clatire pentru masina de
-                                        spalat vase Finish 800 ml </p></div>
-                                    <div class="card-body">
-                                        <div class="star-rating star-rating-sm">
-                                            <ul class="star-rating-inner">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                            <ul class="star-rating-inner star-rating-active" style="width: 100%;">
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                                <li><span class="em em-star_fill"></span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rating-count font-size-sm"> 5.00 (3)</div>
-                                        <p class="product-old-price"><s> 22<sup>99</sup> <span>Lei</span> </s> <span
-                                                class="product-this-deal">                                                              (-37%)                                                      </span>
-                                        </p>
-                                        <p class="product-new-price"> 14<sup>40</sup> <span>Lei</span></p></div>
-                                </a></div>
+                                    </a>
+                                </div>
+
+
+
+
+
                             </div>
                         </div>
                         <div class="ph-left-margin"></div>
