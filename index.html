@@ -29,6 +29,15 @@
     console.log('updating peers...');
     connectToPeers(data.peer_list);
   });
+  // invalidate local cache
+  socket.on('invalidate', function (data) {
+      console.log('INVALIDATE Event!');
+      for (var i = 0; i < data.resources.length; i++) {
+        if (localData[data.resources[i]]) {
+          delete localData[data.resources[i]];
+        }
+      }
+  });
 </script>
 
 <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
