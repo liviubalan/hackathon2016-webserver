@@ -895,56 +895,31 @@
                                     <div class="breadcrumb-inner" itemscope=""
                                          itemtype="http://schema.org/BreadcrumbList">
                                         <ol class="breadcrumb">
-                                            <li class="active">
 
-                        <span itemprop="name">
-                            Casa, Bricolaj &amp; Petshop
-                        </span>
 
-                                            </li>
-                                            <li>
-                                                    <span itemprop="itemListElement" itemscope=""
-                                                          itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="/curatenie-intretinere/l?ref=bc">
 
-                        <span itemprop="name">
-                            Curatenie &amp; Intretinere
-                        </span>
 
-                                                        </a>
-                            </span>
-                                            </li>
-                                            <li class="active">
+                                            <li ng-repeat="breadcrumb in description.breadcrumbs" ng-switch on="breadcrumb.url">
 
-                        <span itemprop="name">
-                            Detergenti &amp; Solutii de curatat
-                        </span>
+                                                <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" ng-switch-when="video.url">
+                                                    <a itemprop="item" href="{{breadcrumb.url}}">
+                                                        <span itemprop="name">
+                                                            {{breadcrumb.name}}
+                                                        </span>
+                                                    </a>
+                                                </span>
+
+                                                <span itemprop="name" ng-switch-default >
+                                                     {{breadcrumb.name}}
+                                                </span>
 
                                             </li>
-                                            <li>
-                                                    <span itemprop="itemListElement" itemscope=""
-                                                          itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="/bucatarie---vase/c?ref=bc">
 
-                        <span itemprop="name">
-                            Bucatarie &amp; Vase
-                        </span>
 
-                                                        </a>
-                            </span>
-                                            </li>
-                                            <li>
-                                                    <span itemprop="itemListElement" itemscope=""
-                                                          itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="/bucatarie---vase/finish/c?ref=bc">
 
-                        <span itemprop="name">
-                            Bucatarie &amp; Vase Finish
-                        </span>
 
-                                                        </a>
-                            </span>
-                                            </li>
+
+
                                         </ol>
                                     </div>
                                 </div>
@@ -1005,9 +980,8 @@
                                                         <div class="ph-body"
                                                              style="transition: none; transform: translate3d(0px, 0px, 0px);">
                                                             <li class="thumbnail-wrapper ph-card" data-ph-id="image-0">
-                                                                <a href="https://s0emagst.akamaized.net/products/721/720037/images/res_b899ceb18c68951c567cea0b547a634a_full.jpg"
-                                                                   class="thumbnail product-gallery-image">
-                                                                    <img src="https://s0emagst.akamaized.net/products/721/720037/images/res_b899ceb18c68951c567cea0b547a634a_450x450_aq2r.jpg"
+                                                                <a href="{{description.product_url}}" class="thumbnail product-gallery-image">
+                                                                    <img src="{{description.product_image}}"
                                                                          alt="Tablete Finish All in One, 56 buc, 1041 g">
                                                                 </a>
                                                             </li>
@@ -1095,7 +1069,7 @@
                                                                     </li>
                                                                 </ul>
                                                                 <ul class="star-rating-inner star-rating-active"
-                                                                    style="width: 0%;">
+                                                                    style="width: {{description.feedback_rate*20}}%;">
                                                                     <li>
                                                                         <span class="em em-star_fill gtm_dx0pnu"></span>
                                                                     </li>
@@ -1114,7 +1088,7 @@
                                                                 </ul>
                                                             </div>
                                                             <span class="star-rating-text star-rating-sm">
-                                                                    0
+                                                                    {{description.feedback_count}}
                                                             </span>
                                                         </a>
                                                         <p>
@@ -4521,7 +4495,7 @@
                     <li><span class="em em-star_fill"></span></li>
                     <li><span class="em em-star_fill"></span></li>
                 </ul>
-                <ul class="star-rating-inner star-rating-active" style="width: <%= feedback.rating * (100 / 5) %>%;">
+                <ul class="star-rating-inner star-rating-active" style="width: {{description.feedback_rate * (100 / 5)}}%;">
                     <li><span class="em em-star_fill"></span></li>
                     <li><span class="em em-star_fill"></span></li>
                     <li><span class="em em-star_fill"></span></li>
