@@ -27,18 +27,23 @@
     peer_id = data.peer_id;
     var peer_list = data.peer_list;
     totalPeerConnections = peer_list.length;
-    console.log(peer_id);
-    console.log(peer_list);
+    console.info('===[SERVER]=== Your PeerID: ' + peer_id);
+    console.info('===[SERVER]=== Initializing your peer list. | (' + data.peer_list.length + ') peer(s) available. New peer list:');
+    console.info(peer_list);
     rtcInit(peer_id);
     connectToPeers(peer_list);
   });
   socket.on('update', function (data) {
-    console.log('updating peers...');
+    if (data.info_only) { // update stats only
+        return false;
+    }
+    console.info('===[SERVER]=== Updating your peer list. | (' + data.peer_list.length + ') peer(s) available. New peer list:');
+    console.info(data.peer_list);
     connectToPeers(data.peer_list);
   });
   // invalidate local cache
   socket.on('invalidate', function (data) {
-      console.log('INVALIDATE Event!');
+      console.log('===[SERVER]=== INVALIDATE local resources. | (' + data.resources.length + ') keys(s) deleted');
       localData = {}; // DELETE ALL LOCAL CACHE
       for (var i = 0; i < data.resources.length; i++) {
         if (localData[data.resources[i]]) {

@@ -40,11 +40,12 @@ io.on('connection', function (socket) {
   clients[socket.id] = socket;
 
   socket.emit('news', { peer_id: peer_id, peer_list: peerList });
+  socket.broadcast.emit('update', {peer_list: peerList, info_only: true});
   socket.on('disconnect', function (data) {
       delete clients[socket.id];
       peerList = [];
       for (var key in clients) {
-          peerList.push(key);
+          peerList.push(key.slice(15));
       }
       socket.broadcast.emit('update', {peer_list: peerList});
   });
