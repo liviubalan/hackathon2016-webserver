@@ -835,13 +835,13 @@
                                     <div class="breadcrumb-inner" itemscope=""
                                          itemtype="http://schema.org/BreadcrumbList">
                                         <ol class="breadcrumb">
+                                            <li ng-repeat="breadcrumb in description.breadcrumbs" ng-switch on="breadcrumb.url.toString()">
 
+                                                <span itemprop="name" ng-switch-when="false">
+                                                     {{breadcrumb.name}}
+                                                </span>
 
-
-
-                                            <li ng-repeat="breadcrumb in description.breadcrumbs" ng-switch on="breadcrumb.url">
-
-                                                <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" ng-switch-when="video.url">
+                                                <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" ng-switch-default >
                                                     <a itemprop="item" href="{{breadcrumb.url}}">
                                                         <span itemprop="name">
                                                             {{breadcrumb.name}}
@@ -849,17 +849,7 @@
                                                     </a>
                                                 </span>
 
-                                                <span itemprop="name" ng-switch-default >
-                                                     {{breadcrumb.name}}
-                                                </span>
-
                                             </li>
-
-
-
-
-
-
                                         </ol>
                                     </div>
                                 </div>
@@ -1074,7 +1064,7 @@
                                                         <p class="product-this-deal">
                                                             Economisesti 42% </p>
                                                         <p class="product-new-price">
-                                                            45<sup>99</sup> <span>Lei</span>
+                                                            {{price.price | currency}}<sup>99</sup> <span>Lei</span>
                                                         </p>
 
                                                         <span class="label label-in_stock">{{ availability.label }}</span>
@@ -1776,61 +1766,7 @@
                 <div class="container pad-btm-lg">
                     <h2>Specificatii</h2>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="pad-top-sm">
-                                <p class="text-uppercase"><strong>Caracteristici generale</strong></p>
-                                <div class="table-responsive">
-                                    <table class="table table-striped product-page-specifications">
-                                        <tbody>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Tip produs</td>
-                                            <td class="col-xs-8">Detergent</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Utilizare</td>
-                                            <td class="col-xs-8">Masina de spalat vase</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Tip detergent</td>
-                                            <td class="col-xs-8">Tablete</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="pad-top-sm">
-                                <p class="text-uppercase"><strong>Alte caracteristici</strong></p>
-                                <div class="table-responsive">
-                                    <table class="table table-striped product-page-specifications">
-                                        <tbody>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Dimensiuni (IxLxA mm)</td>
-                                            <td class="col-xs-8">251 x 190 x 63</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Greutate (Kg)</td>
-                                            <td class="col-xs-8">1.41</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-xs-4 text-muted">Cantitate/pachet</td>
-                                            <td class="col-xs-8">56 tablete</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="disclaimer-section">
-                                <hr>
-
-                                <p>Producator: <a href="/finish/b">Finish</a></p>
-
-
-                                <p>eMAG.ro face eforturi permanente pentru a păstra acurateţea informaţiilor din acestă
-                                    pagină. Rareori acestea pot conţine inadvertenţe: fotografia are caracter informativ
-                                    şi poate conţine accesorii neincluse în pachetele standard, unele specificaţii sau
-                                    preţul, pot fi modificate de catre producător fără preaviz sau pot conţine erori de
-                                    operare. Toate promoţiile prezente în site sunt valabile în limita stocului.</p>
-                            </div>
+                        <div class="col-md-12" ng-bind-html="renderHtml(specs)">
 
                         </div>
                     </div>
