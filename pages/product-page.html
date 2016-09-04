@@ -1060,11 +1060,11 @@
                                                     <div class="product-highlight product-page-pricing hidden-xs hidden-sm">
 
 
-                                                        <span ng-bind-html="renderHtml(price.old_price | price:'product-old-price')"></span>
+                                                        <p class="product-old-price">{{price.old_price | price:'0'}}<sup>{{price.old_price | price:'1'}}</sup> <span>Lei</span></p>
 
                                                         <p class="product-this-deal" ng-show="price.discount">Economisesti {{price.discount}}{{price.discount_type}} </p>
 
-                                                        <span ng-bind-html="renderHtml(price.price | price:'product-new-price')"></span>
+                                                        <p class="product-new-price">{{price.price | price:'0'}}<sup>{{price.price | price:'1'}}</sup> <span>Lei</span></p>
 
 
                                                         <span class="label label-in_stock">{{ availability.label }}</span>
@@ -1161,10 +1161,11 @@
                                                     <li><span class="em em-star_fill"></span></li>
                                                 </ul>
                                             </div>
+                                            <p class="product-old-price">
+                                                <s>{{item.old_price | price:'0'}}<sup>{{item.old_price | price:'1'}}</sup> <span>Lei</span></s><span class="product-this-deal">(-{{item.discount}}%)</span>
+                                            </p>
 
-                                            <span ng-bind-html="renderHtml(item.old_price | price:'product-old-price':'strike':item.feedback_rating)"></span>
-
-                                            <span ng-bind-html="renderHtml(item.price | price:'product-new-price')"></span>
+                                            <p class="product-new-price">{{item.price | price:'0'}}<sup>{{item.price | price:'1'}}</sup> <span>Lei</span></p>
 
                                         </div>
                                     </a>

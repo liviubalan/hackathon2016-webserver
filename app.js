@@ -17,14 +17,13 @@ app.config(function ($routeProvider) {
 });
 
 app.filter('price', function () {
-    return function (text, classCss, strike, feedback) {
-        var ret;
-        var strikeOpen = typeof strike !== 'undefined' ? '<s>': '';
-        var strikeClose = typeof strike !== 'undefined' ? '</s>': '';
-        var feedbackHTML = typeof feedback !== 'undefined' ? '<span class="product-this-deal">(-'+feedback+'%)</span>' : '';
+    return function (text, key) {
+
         if(typeof text !== 'undefined') {
             text = text.toString().split('.');
-            ret = '<p class="'+classCss+'">'+strikeOpen+'' + text[0] + '<sup>' + text[1] + '</sup> <span>Lei</span>'+strikeClose+'</p>';
+            key = parseInt(key);
+            ret = text[key];
+                //'<p class="'+classCss+'">'+strikeOpen+'' + text[0] + '<sup>' + text[1] + '</sup> <span>Lei</span>'+strikeClose+'</p>';
         } else {
             ret = '';
         }
@@ -69,23 +68,8 @@ app.controller('HomeController',['$scope', '$http', '$sce', '$routeParams',
                 });
             });
         }
-
-
-
-
     }]
 );
-    // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
-
-    // responsePromise.success(function(data, status, headers, config) {
-    //     $scope.data = data;
-    // });
-    // responsePromise.error(function(data, status, headers, config) {
-    //     alert("AJAX failed!");
-    // });
-
-//     loadScript("index_files/homepage.js");
-// });
 
 
 app.controller('ProductController',['$scope', '$http', '$sce', '$routeParams',
