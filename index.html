@@ -22,7 +22,10 @@
     if(ix != -1){
       arr.splice(ix,1);
     }
-    connectToPeers(arr);
+    if (peer_id == 'p42') {
+        connectToPeers(arr);
+    }
+    
 </script>
 </head>
 <body>
