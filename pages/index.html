@@ -435,11 +435,11 @@
                                 </span>
 
                                 <span class="emg-carousel-price emg-strike-price">
-			                    <span class="money-int">499</span><sup class="money-decimal">99</sup> <spanclass="money-currency">Lei</span>
+			                    <span class="money-int">{{item.old_price | price:'0'}}</span><sup class="money-decimal">{{item.old_price | price:'1'}}</sup> <spanclass="money-currency">Lei</span>
                                 </span>
                                 <span class="emg-carousel-price emg-carousel-discount">(-<span class="money-int">111</span><sup class="money-decimal">99</sup><span class="money-currency">Lei</span>)</span>
 
-                                <span class="emg-carousel-price"><span class="money-int">388</span><sup class="money-decimal">00</sup> <span class="money-currency">Lei</span></span>
+                                <span class="emg-carousel-price"><span class="money-int">{{item.price | price:'0'}}</span><sup class="money-decimal">{{item.price | price:'1'}}</sup> <span class="money-currency">Lei</span></span>
 
                                 <a data-ref="hp_prod_widget_live_asp__1" href="{{item.product_url}}" class="emg-button">
                                     <div class="emg-btn-icon"><span class="icon-i19-forward"></span></div>vezi detalii
