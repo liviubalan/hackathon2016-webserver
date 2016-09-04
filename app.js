@@ -27,7 +27,6 @@ app.controller('HomeController', function ($scope, $http) {
     // });
 
     loadScript("index_files/homepage.js");
-    loadScript("index_files/custom-select.js");
 });
 
 app.controller('ProductController', function ($scope, $http, $route, $routeParams) {
