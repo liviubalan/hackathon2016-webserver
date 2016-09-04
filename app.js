@@ -17,7 +17,6 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('HomeController', function ($scope, $http) {
-    $scope.message = 'Hello from HomeController';
     // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
 
     // responsePromise.success(function(data, status, headers, config) {
@@ -26,6 +25,9 @@ app.controller('HomeController', function ($scope, $http) {
     // responsePromise.error(function(data, status, headers, config) {
     //     alert("AJAX failed!");
     // });
+
+
+    loadScript("index_files/homepage.js");
 });
 
 app.controller('ProductController', function ($scope, $http, $route, $routeParams) {
@@ -60,3 +62,21 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
 setTimeout(function() {
   angular.bootstrap(document, ['eMAG-SP-RTC']);
 }, 1000);
+
+//==========================================================
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+}
