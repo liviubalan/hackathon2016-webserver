@@ -47,16 +47,15 @@ app.controller('ProductController',['$scope', '$http', '$sce', '$routeParams',
 
         for (var res in resorcesToLoad) {
             requestData("product/" + $routeParams.part_number + "/" + resorcesToLoad[res][0] + "." + resorcesToLoad[res][1]).then(function (data) {
-                $scope.data = data;
+                res = getResourceNameFromURL(data.resource);
+                $scope.$apply(function(){
+                    $scope[res] = data.data;
+                });
             }, function (err) {
                 var responsePromise = $http.get('http://api.hack1.smart-things.ro/' + err.resource);
                 responsePromise.success(function (data, status, headers, config) {
-                    var fileName = config.url.split("/");
-                    fileName = fileName[fileName.length - 1];
-                    fileName = fileName.split(".");
-                    var last = fileName[0];
-                    var ext = fileName[1];
-                    $scope[last] = data;
+                    res = getResourceNameFromURL(config.url);
+                    $scope[res] = data;
                     saveData(err.resource, data);
                 });
                 responsePromise.error(function (data, status, headers, config) {
@@ -64,6 +63,7 @@ app.controller('ProductController',['$scope', '$http', '$sce', '$routeParams',
                 });
             });
         }
+
     }]
 );
 
@@ -75,15 +75,7 @@ setTimeout(function () {
 
 
 
-
-
-
-
-
-
-
-
-//==========================================================
+//======================== UTILS ==================================
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
@@ -99,4 +91,13 @@ function loadScript(url, callback)
 
     // Fire the loading
     head.appendChild(script);
+}
+
+
+function getResourceNameFromURL(url) {
+    var fileName = url.split("/");
+    fileName = fileName[fileName.length - 1];
+    fileName = fileName.split(".");
+    var last = fileName[0];
+    return last;
 }
