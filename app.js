@@ -39,7 +39,7 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
 
     for (var res in resorcesToLoad) {
       requestData("product/"+$routeParams.part_number+"/"+resorcesToLoad[res]+".json").then(function(data){
-        $scope.data = angular.fromJson(data);
+        $scope.data = data;
       },function(err){
         var responsePromise = $http.get('http://api.hack1.smart-things.ro/'+err.resource);
         responsePromise.success(function (data, status, headers, config) {

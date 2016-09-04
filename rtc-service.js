@@ -6,7 +6,15 @@ var peer_id = query.p || 'p1';
 function rtcInit(peerId) {
     peer = new Peer(peerId, {key: '7c5tmjerk7ec23xr'});
     peer.on('connection', function(conn) {
-      conn.on('data', onDataCallback);
+        if (peer.connections[conn.peer]) {
+            conn.close();
+            peer.connections[conn.peer].shift(); // remove any previous connections
+        }
+        conn.on('data', onDataCallback);
+        conn.on('close', function() {
+            conn.close();
+            peer.connections[conn.peer].shift(); // remove connection
+        });
     });
 }
 rtcInit(peer_id);

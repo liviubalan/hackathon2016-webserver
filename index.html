@@ -8,14 +8,12 @@
 <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
 <script src="rtc-service.js"></script>
 <script type="text/javascript">
-    var arr = ["p40","p41","p42"];
+    var arr = ["p40","p41","p42"]; // @todo: get connections from server
     ix = arr.indexOf(peer_id);
     if(ix != -1){
       arr.splice(ix,1);
     }
-    if (peer_id == "p42") {
-        connectToPeers(arr);
-    }
+    connectToPeers(arr);
 </script>
 
 <script type="text/javascript">
