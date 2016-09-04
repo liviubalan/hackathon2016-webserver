@@ -75,7 +75,7 @@ function requestData(key) {
                 'request_peer_id': peer_id
             });
             requestsSent++;
-            sleep(200).then(function() {
+            sleep(500).then(function() {
                 if (requestStatus[key] == 'pending') {
                     requestFn(prs);
                 } else {
