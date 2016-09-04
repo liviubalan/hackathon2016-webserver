@@ -39,7 +39,7 @@ app.controller('HomeController',['$scope', '$http', '$sce', '$routeParams',
         };
 
         var resorcesToLoad = [
-            ['live-widget', 'json'],
+            ['live_widget', 'json'],
             ['slider', 'json'],
             ['widgets', 'json'],
             ['menu', 'html']
