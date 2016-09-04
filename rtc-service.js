@@ -32,7 +32,9 @@ var onDataCallback = function(data) {
         } else {
             peer.connections[data.request_peer_id][0].send({
                 'status': 'not found',
-                'data': ''
+                'data': '',
+                'peer': data.request_peer_id,
+                'key': data.key
             });
         }
     }
