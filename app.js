@@ -45,25 +45,31 @@ app.controller('ProductController',['$scope', '$http', '$sce', '$routeParams',
             ['specs', 'html']
         ];
 
-        for (var res in resorcesToLoad) {
-            requestData("product/" + $routeParams.part_number + "/" + resorcesToLoad[res][0] + "." + resorcesToLoad[res][1]).then(function (data) {
-                res = getResourceNameFromURL(data.resource);
-                $scope.$apply(function(){
-                    $scope[res] = data.data;
-                });
-            }, function (err) {
-                var responsePromise = $http.get('http://api.hack1.smart-things.ro/' + err.resource);
-                responsePromise.success(function (data, status, headers, config) {
-                    res = getResourceNameFromURL(config.url);
-                    $scope[res] = data;
-                    saveData(err.resource, data);
-                });
-                responsePromise.error(function (data, status, headers, config) {
-                    alert("AJAX failed!");
-                });
-            });
-        }
-
+        var loadResources = function() {
+          for (var res in resorcesToLoad) {
+              requestData("product/" + $routeParams.part_number + "/" + resorcesToLoad[res][0] + "." + resorcesToLoad[res][1]).then(function (data) {
+                  res = getResourceNameFromURL(data.resource);
+                  $scope.$apply(function(){
+                      $scope[res] = data.data;
+                  });
+              }, function (err) {
+                  var responsePromise = $http.get('http://api.hack1.smart-things.ro/' + err.resource);
+                  responsePromise.success(function (data, status, headers, config) {
+                      res = getResourceNameFromURL(config.url);
+                      $scope[res] = data;
+                      saveData(err.resource, data);
+                  });
+                  responsePromise.error(function (data, status, headers, config) {
+                      alert("AJAX failed!");
+                  });
+              });
+          }  
+        };
+        loadResources();
+        
+        socket.on('invalidate', function (data) {
+          loadResources();
+        });
     }]
 );
 
