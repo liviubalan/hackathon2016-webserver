@@ -1,6 +1,7 @@
 var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
+var url = require('url');
 
 app.listen(8001);
 
@@ -9,6 +10,12 @@ function handler (req, res) {
   function (err, data) {
     if (err) {
       res.writeHead(500);
+      
+      // invalidate resource
+      var queryObject = url.parse(req.url, true).query;
+      var resource = queryObject.resource;
+      io.sockets.emit('invalidate', {resources: [resource]});
+
       return res.end('Error loading index.html');
     }
 
