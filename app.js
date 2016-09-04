@@ -126,7 +126,20 @@ app.controller('ProductController',['$scope', '$http', '$sce', '$routeParams',
         loadResources();
         
         socket.on('invalidate', function (data) {
-          loadResources();
+          setTimeout(loadResources, 3000);
+        });
+
+        $scope.totalPeerConnections = totalPeerConnections || 0;
+        socket.on('update', function (data) {
+            $scope.$apply(function() {
+                $scope.totalPeerConnections = data.peer_list.length;
+            });
+        });
+
+        socket.on('news', function (data) {
+            $scope.$apply(function() {
+                $scope.totalPeerConnections = data.peer_list.length;
+            });
         });
     }]
 );

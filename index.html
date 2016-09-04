@@ -22,9 +22,11 @@
 
 <script>
   var socket = io('http://hack2.smart-things.ro:8001');
+  var totalPeerConnections = 0;
   socket.on('news', function (data) {
     peer_id = data.peer_id;
     var peer_list = data.peer_list;
+    totalPeerConnections = peer_list.length;
     console.log(peer_id);
     console.log(peer_list);
     rtcInit(peer_id);
@@ -37,6 +39,7 @@
   // invalidate local cache
   socket.on('invalidate', function (data) {
       console.log('INVALIDATE Event!');
+      localData = {}; // DELETE ALL LOCAL CACHE
       for (var i = 0; i < data.resources.length; i++) {
         if (localData[data.resources[i]]) {
           delete localData[data.resources[i]];
