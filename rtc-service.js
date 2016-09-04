@@ -79,7 +79,7 @@ function requestData(key) {
                 if (requestStatus[key] == 'pending') {
                     requestFn(prs);
                 } else {
-                    resolve(localData[key]);
+                    resolve({"data": localData[key],"resource":key});
                 }
             });
         }
