@@ -47,144 +47,17 @@
     <![endif]-->
 
 
-    <script type="text/javascript">
-        var strCancel = 'Anuleaza';
-        var changeStr = 'modifica';
-        var compareMsg = new Array('Poti compara maxim 4 produse!', 'Va rugam sa selectati cel putin 2 produse');
-        var closeStr = 'Inchide';
-        var static_url = '';
-        var supermarketMessages =
-        {
-            'qty_chars': 'Cantitatea introdusă trebuie<br />să conțină caractere de la 0 la 9',
-            'qty_max': 'Cantitatea maximă este',
-            'qty_min': 'Cantitatea minimă este',
-            'qty_between': 'Cantitatea introdusă trebuie<br />să fie între',
-            'qty_incorrect': 'Cantitatea aleasă de tine nu poate fi comandată.<br />Pentru o alegere corectă a cantității<br />te rugăm să folosești butoanele "-" sau "+"',
-            'qty_predefined': 'Cantitatea introdusă trebuie să fie una din valorile:<br />',
-            'qty_and': 'și',
-            'added_success': 'Produsele au fost<br />adăugate în coș',
-            'transport_active': 'Livrare prin curier',
-            'transport_inactive': 'In curând in zona ta',
-            'pickup_active': 'Ridicare din magazin',
-            'pickup_inactive': 'Indisponibil'
-        };
-        var EmgAddressUrl = "https://www.emag.ro/user/ajax/editAddressForm";
-
-        // config vars for autocomplete
-        var translation_config = {
-            "brand.headline": "Sugestii brand",
-            "searchTerm.headline": "Alţi termeni sugeraţi",
-            "productName.headline": "Sugestii produse",
-            "category.headline": "Categorii sugerate",
-            "category": "Categorie",
-            "productName": "Produs",
-            "unspecified": "Nespecificat",
-            "brand": "Brand",
-            "content": "Conţinut",
-            "searchTerm": "Termen căutat",
-            "inCategory": "în",
-            "relevantProducts": "produse relevante",
-            "relevantSuggestions": "cuvinte/categorii relevante",
-            "numberOfProducts": "rezultate"
-        };
-    </script>
     <link rel="stylesheet" type="text/css" href="/index_files/ro_font.css">
     <link rel="stylesheet" type="text/css" href="/index_files/homepage.css">
 
-    <script type="text/javascript" src="/index_files/homepage.js"></script>
-
-    <script type="text/javascript" src="/index_files/custom-select.js"></script>
-
-
-    <script type="text/javascript">
-        var site_url = "";
-        var currency_code = "RON";
-        var cookie_domain = "emag.ro";
-        var _sf_perf = (new Date()).getTime();
-    </script>
-
-
     <link rel="shortcut icon" href="https://s0emagst.akamaized.net/layout/ro/favicon2.ico">
 
-    <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "http://www.emag.ro/",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "http://www.emag.ro/search/{query_string}",
-            "query-input": "required name=query_string"
-        }
-    }
-
-    </script>
-
-    <script type="text/javascript">
-        var siteLocale = 'ro';
-        var is_loggedin = 1;
-        var is_supermarket = document.location.pathname.indexOf("/supermarket") >= 0;
-        var addToFavsPath = "/add-to-favorites";
+    
 
 
-        function add_to_cart(queryString) {
-            varUrl = 'https://www.emag.ro/addtocart--' + queryString;
-            $('#modify_cart').attr("action", varUrl);
-            $('#modify_cart').submit();
-
-            return true;
-        }
-
-        var search_url_prefix = '';
-
-        var debug_buttons_allowed = "1";
-    </script>
-
-    <script type="text/javascript" src="/index_files/emag_search_general.js"></script>
-
-    <!--[if lt IE 9]>
-    <script src="http://www.emag.ro/resources/js/html5shiv.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://www.emag.ro/resources/css/ie8_fixes.css?v=1"/>
-    <![endif]-->
 </head>
 <body>
-<script type="text/javascript">
-    var deliveryTimeEnabled = '';
-    var productAssocEnabled = '';
-</script>
 
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-
-        // moved from homepage_widgets.js
-
-
-        $('.emg-dep').on('click', '.gtm-link-slot, .gtm-quick-link', function (event) {
-            event.preventDefault(); //stop redirect
-
-            var total = $(this).closest('ul').children().length;
-            var position = total - $(this).closest('li').nextAll().length;
-            var location = $(this).attr('href');
-
-
-        });
-
-        $('.emg-dep').on('click', '.emg-carousel a', function (event) {
-            event.preventDefault();
-
-            var product = $(this).children('.gtm-product-details');
-            var total = $(this).closest('.emg-carousel-overlay').children().length;
-            var position = total - $(this).closest('figure').nextAll().length;
-            var location = $(this).attr('href');
-
-
-        });
-    });
-
-
-</script>
 <div id="emg-body-overlay" class="emg-body-overlay ">
 
 
@@ -294,349 +167,11 @@
                         var affiliate_site_type = 'd';
                     </script>
 
-                    <script type="text/javascript">
-                        var wishlist_products_loaded = false;
-
-
-                        /* Add to cart csrf protection token */
-                        var add_to_cart_token = '<input type="hidden" name="action_token" value="987c870d0cf80edcb0445d244d13845d2b9b1ff6" />';
-                        var send_sms_token = $('<input type="hidden" name="action_token" value="55d282cbce642197412544c834b240c05bdba40a" />');
-                        var widget_newsletter_token = $('<input type="hidden" name="action_token" value="d08d660dd8ed7decb47882c027be1e2bcaef84c1" />');
-                        var cart_products = $('<input type="hidden" name="action_token" value="" />');
-                        var auth = 0;
-
-                        window.is_platinum_user = false;
-
-                        $(document).ready(function () {
-                            $('.emag-anniversary-progress-mask').css('width', '100%');
-
-                            $("form").each(function () {
-                                var actionAttr = $(this).attr('action');
-                                var idAttr = $(this).attr('id');
-
-                                if (typeof actionAttr !== 'undefined' && actionAttr !== false) {
-                                    if (actionAttr.indexOf("addtocart/voucher") < 0 && (actionAttr.indexOf("addtocart") >= 0 || actionAttr.indexOf("updatecart") >= 0 || actionAttr.indexOf("removefromcart") >= 0)) {
-                                        $(this).append(add_to_cart_token);
-                                    }
-                                    ;
-                                }
-
-                                if (typeof idAttr !== 'undefined' && idAttr !== false) {
-                                    if (typeof idAttr !== 'undefined' && idAttr !== false && idAttr.indexOf("modify_cart") >= 0 && idAttr.indexOf("modify_cart_header") < 0) {
-                                        $(this).append(add_to_cart_token);
-                                    }
-                                    ;
-                                }
-                            });
-                            $('#emg-mini-cart').emgBubbleTip({
-                                trigger: 'hover',
-                                width: 312,
-                                align: 'right',
-                                offset: 8,
-                                additionalClass: 'emg-fluid-my-account-tip emg-fluid-my-account-tip-cartfix',
-                                callback: function () {
-                                    // emgFluidOverlayShow('open', '#emg-mini-cart');
-                                    emgLoadHeaderCart();
-                                    if ($('.emg-cart-bubble').html() == '0') {
-                                        $('#emg-minicart-footer-area').hide();
-                                    }
-                                    else {
-                                        $('#emg-minicart-footer-area').show();
-                                    }
-                                }
-                            });
-
-                            /*
-                             On first visit, show login popup indefinitely
-                             After the first click (flag stored in the 'loginTooltipShown' cookie), it will revert to the standard hover behaviour
-                             */
-                            var loginTooltipShown,
-                                    loginBubbleTip = $('#emg-user-menu'),
-                                    tooltipConfigObject = {
-                                        trigger: 'hover',
-                                        width: 208,
-                                        align: 'right',
-                                        offset: 8,
-                                        showOverlay: true,
-                                        additionalClass: 'emg-fluid-my-account-tip'
-                                        // callback: function() {
-                                        //     emgFluidOverlayShow('open', '#emg-user-menu');
-                                        // }
-                                    }
-                            var onLoginTooltipNotShown = function (e) {
-                                loginBubbleTip.setTrigger('hover');
-                                $.cookie('loginTooltipShown', true, {path: '/'});
-                                loginBubbleTip.trigger('mouseleave');
-                                $(document).off('click', onLoginTooltipNotShown);
-                            };
-
-                            if (auth == 1) {
-                                $.cookie('loginTooltipShown', true, {path: '/'});
-                            }
-
-                            loginTooltipShown = $.cookie('loginTooltipShown');
-                            if (!loginTooltipShown) {
-                                $(document).on('click', onLoginTooltipNotShown);
-                                tooltipConfigObject.trigger = 'instant';
-                                tooltipConfigObject.instantTriggerTimeout = 0;
-                                tooltipConfigObject.beforeCallbackTriggerOnce = true;
-                                tooltipConfigObject.beforeCallback = function (e) {
-                                    this.setTrigger('hover');
-                                    this.options.beforeCallback = null;
-                                };
-                            }
-
-                            loginBubbleTip.emgBubbleTip(tooltipConfigObject);
-
-                            var wishlist_products_data;
-
-                            $('#emg-user-fav').emgBubbleTip({
-                                trigger: 'hover',
-                                width: 303,
-                                align: 'right',
-                                offset: 8,
-                                showOverlay: true,
-                                additionalClass: 'emg-fluid-my-account-tip emg-fluid-my-account-tip-favfix',
-                                callback: function () {
-                                    //emgFluidOverlayShow('open', '#emg-user-fav');
-                                    if (wishlist_products_loaded) {
-                                        $('.emg-fluid-fav-lp-padding').replaceWith(wishlist_products_data);
-                                    } else {
-                                        $.ajax({
-                                            url: '/favourite-products',
-                                            cache: true,
-                                            type: 'GET',
-                                            success: function (data) {
-                                                wishlist_products_loaded = true;
-                                                wishlist_products_data = data;
-                                                $('.emg-fluid-fav-lp-padding').replaceWith(data);
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-
-
-                            var shoppingCartUrl = 'https://www.emag.ro/shopping-cart', cc, cartCookie, is_new_client;
-                            $("#shoppingCartLink").attr('href', shoppingCartUrl);
-                            try {
-                                cc = $.cookie('cart_summary_new');
-                                if (cc)
-                                    cartCookie = jQuery.parseJSON(decodeURIComponent(cc));
-                            } catch (e) {
-                                $.cookie.raw = true;
-                                cc = $.cookie('cart_summary_new');
-                                if (cc)
-                                    cartCookie = jQuery.parseJSON(decodeURIComponent(decodeURIComponent(cc)));
-                            }
-                            if (cartCookie && typeof cartCookie.b !== 'undefined' && parseInt(cartCookie.b) > 0) {
-                                $(".emg-cart-bubble").text(cartCookie.b).show();
-                                $("#header .cart").addClass("cart-notification");
-                                $(".cartToggler").attr("href", shoppingCartUrl);
-                            }
-
-                            try {
-                                is_new_client = $.cookie('cart_summary_new');
-                            } catch (e) {
-                                $.cookie.raw = true;
-                                is_new_client = decodeURIComponent($.cookie('cart_summary_new'));
-                            }
-                            if (typeof is_new_client !== 'undefined') {
-                                shoppingCartUrl = shoppingCartUrl + '?reset=1';
-                            }
-                            $("#shoppingCartLink").attr('href', shoppingCartUrl);
-
-                            try {
-
-                                var question_add = [];
-                                question_add.push('scrie intrebarea si logheaza-te pentru a o publica');
-                                question_add.push('scrie o intrebare ...');
-
-
-                                $('#questions_add').attr('placeholder', question_add[auth]);
-
-                                reviews_f(auth);
-
-                                var review_show_m = [];
-                                review_show_m.push('intra in cont');
-                                review_show_m.push('continua');
-                                $('#review_show_m').html(review_show_m[auth]);
-
-                                var review_add_com = [];
-
-                                review_add_com.push('scrie comentariul si logheaza-te pentru a-l publica');
-                                review_add_com.push('scrie comentariul ...');
-                                $('.review_comment').attr('placeholder', review_add_com[auth]);
-
-
-                                var review_add_com_but = [];
-                                review_add_com_but.push('intra in cont');
-                                review_add_com_but.push('publică');
-                                $('.review_add_com_but').html(review_add_com_but[auth]);
-
-                                var review_add_com_answer = [];
-
-                                review_add_com_answer.push('scrie raspunsul si logheaza-te pentru a-l publica');
-                                review_add_com_answer.push('scrie raspunsul ...');
-                                $('.review_comentariu_raspunde input').attr('placeholder', review_add_com_answer[auth]);
-                            }
-                            catch (err) {
-
-                            }
-
-                            if (!auth) {
-                                $('.wLoginLnk').css('display', 'table-cell');
-                            }
-
-                        });
-                    </script>
-
-
-                    <script type="text/javascript">
-                    </script>
-                    <style type="text/css">
-                        .debug-search-tool {
-                            position: fixed;
-                            bottom: 5px;
-                            right: 15px;
-                            font-family: Arial;
-                            font-size: 16px;
-                            display: none;
-                            font-weight: bold;
-                            cursor: pointer;
-                            z-index: 999;
-                            opacity: .4;
-                            will-change: transform;
-                        }
-
-                        .debug-search-tool span {
-                            display: inline-block;
-                            vertical-align: middle;
-                            cursor: pointer;
-                        }
-
-                        .debug-search-tool img {
-                            display: inline-block;
-                            vertical-align: middle;
-                            cursor: pointer;
-                        }
-                    </style>
-
-
-                    <script type="text/javascript">
-                        function reloadWithQueryStringVars(queryStringVars) {
-                            var existingQueryVars = location.search ? location.search.substring(1).split("&") : [],
-                                    currentUrl = location.search ? location.href.replace(location.search, "") : location.href,
-                                    newQueryVars = {},
-                                    newUrl = currentUrl + "?";
-                            if (existingQueryVars.length > 0) {
-                                for (var i = 0; i < existingQueryVars.length; i++) {
-                                    var pair = existingQueryVars[i].split("=");
-                                    newQueryVars[pair[0]] = pair[1];
-                                }
-                            }
-                            if (queryStringVars) {
-                                for (var queryStringVar in queryStringVars) {
-                                    newQueryVars[queryStringVar] = queryStringVars[queryStringVar];
-                                }
-                            }
-                            if (newQueryVars) {
-                                for (var newQueryVar in newQueryVars) {
-                                    newUrl += newQueryVar + "=" + newQueryVars[newQueryVar] + "&";
-                                }
-                                newUrl = newUrl.substring(0, newUrl.length - 1);
-                                window.location.href = newUrl;
-                            } else {
-                                window.location.href = location.href;
-                            }
-                        }
-
-                        $(document).ready(function () {
-                            if ($('.product-holder-grid:first').html() || $('.emg-listing-products:first').html()) {
-                                $('.debug-search-tool').fadeIn();
-                                $('.debug-search-tool').click(function (e) {
-                                    reloadWithQueryStringVars({"debugQuery": "1", "nocache": "1"});
-                                });
-                            }
-                            else {
-                                $('.debug-search-tool').hide();
-                            }
-
-                            $('.debug-search-tool').appendTo('footer');
-                        });
-                    </script>
-
                 </div>
                 <div id="emg-fluid-overlay" data-statuson="false"></div>
             </div>
         </div>
         <div class="emg-top-margin"></div>
-        <script type="text/javascript">
-            var activeAbs = {"62": {"c": "5", "d": "95"}, "77": {"d": "75", "e": "10", "f": "10", "c": "5"}};
-
-            function runAb(name) {
-                if (!activeAbs || !activeAbs[name]) {
-                    return null;
-                }
-                try {
-                    var abOpt = jQuery.parseJSON($.cookie("aboption"));
-                } catch (e) {
-                }
-                if (abOpt && abOpt[name] && activeAbs[name][abOpt[name]]) {
-                    return abOpt[name];
-                }
-                var currentOpt = generateAb(activeAbs[name]);
-                if (currentOpt) {
-                    recordAB(abOpt, name, currentOpt);
-                }
-                return currentOpt;
-            }
-
-            function recordAB(abOpt, name, currentOpt) {
-                if (!abOpt) {
-                    abOpt = {};
-                } else {
-                    $.each(abOpt, function (opt, val) {
-                        if (!activeAbs[opt]) {
-                            delete abOpt[opt];
-                        }
-                    });
-                }
-                abOpt[name] = currentOpt;
-
-                $.cookie("aboption", JSON.stringify(abOpt), {path: '/', domain: '.emag.ro', expires: 30});
-
-            }
-
-            function generateAb(distribution) {
-                var limit = 0;
-                var rnd = Math.floor(Math.random() * 100 + 1);
-                var curOpt = lastOpt = null;
-                $.each(distribution, function (opt, val) {
-                    lastOpt = opt;
-                    limit += parseFloat(val);
-                    if (rnd <= limit) {
-                        curOpt = opt;
-                        return false;
-                    }
-                });
-                if (curOpt) {
-                    return curOpt;
-                } else {
-                    return lastOpt;
-                }
-            }
-
-            $(document).ready(function () {
-                runAb(53);
-                runAb(62);
-                runAb(66);
-                runAb(57);
-                runAb(69);
-                runAb(74);
-                runAb(77);
-            });
-        </script>
 
         <div class="emg-fluid-sub-menu" style="visibility: visible;">
             <!-- Main menu bar -->
@@ -2195,9 +1730,6 @@
         <div class="emg-menu-container emg-fluid-slider-container">
             <div class="emg-menu-overlay " style="visibility: visible;">
                 <div class="emg-slider" data-n="6" style="display: block;"></div>
-                <script type="text/javascript">
-                    var emgSlideObj = {};
-                </script>
             </div>
         </div>
         <div class="emg-fluid-notification-wrapper">
@@ -2296,19 +1828,6 @@
 
     </style>
 
-
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '',
-                status: true, // check login status
-                oauth: true, // enable OAuth 2.0
-                xfbml: true,  // parse XFBML tags on this page?
-                version: ''
-            });
-        }
-    </script>
 
     <form id="modify_cart_header" method="post">
         <input type="hidden" name="action_token" value="">
@@ -2445,11 +1964,11 @@
                                 id="38bc9e56c3c3c89ff79c1b354eff0f81" style="width: 184.8px;">
                             <a data-ref="hp_prod_widget_live_asp__1"
                                href="#/product/DTPGQBBBM">
-                                <img src="https://s0emagst.akamaized.net/products/744/743232/images/res_a1bfbf9529385f728a3af456ab1de1d9_150x150_73pe.jpg">
+                                <img src="https://s0emagst.akamaized.net/products/721/720037/images/res_b899ceb18c68951c567cea0b547a634a_150x150_itj8.jpg">
                             </a>
                             <div class="emg-carousel-separator"></div>
                             <figcaption>
-                                <p><a data-ref="hp_prod_widget_live_asp__1" href="#/product/DTPGQBBBM">Pompa de san electrica Tomme Tippe</a>
+                                <p><a data-ref="hp_prod_widget_live_asp__1" href="#/product/DTPGQBBBM">Tablete Finish Quantum, 20 buc, 430 g</a>
                                 </p>
                                 <span class="widget_product_rating">
                                     <span class="product_rating">
@@ -3629,143 +3148,7 @@
             <!-- END Carousel -->
         </section>
 
-        <script>
-            $(window).load(function () {
-                if (typeof createCookie != 'function') {
-                    function createCookie(name, value, days) {
-                        var expires = "";
-                        if (days) {
-                            var date = new Date();
-                            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                            expires = "; expires=" + date.toGMTString();
-                        }
-                        document.cookie = name + "=" + value + expires + "; path=/";
-                    }
-                }
-                if (typeof readCookie != 'function') {
-                    function readCookie(name) {
-                        var nameEQ = name + "=";
-                        var ca = document.cookie.split(';');
-                        for (var i = 0; i < ca.length; i++) {
-                            var c = ca[i];
-                            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-                        }
-                        return null;
-                    }
-                }
-
-                var abTestingVariants = {};
-
-                var cookieABTestingId = '';
-                var cookieVariant = '';
-
-                if ((cookieABTestingId.length) && (cookieVariant.length)) {
-                    if (readCookie('EMAG_ABTesting')) {
-                        try {
-                            abTestingVariants = JSON.parse(readCookie('EMAG_ABTesting'));
-                        } catch (e) {
-                        }
-                    }
-                    if (typeof abTestingVariants[cookieABTestingId] == 'undefined') {
-                        abTestingVariants[cookieABTestingId] = cookieVariant;
-                    }
-                }
-
-                createCookie('EMAG_ABTesting', JSON.stringify(abTestingVariants), 30);
-
-                if (cookieABTestingId.length) {
-                    try {
-                        $.ajax('/ablogger.php?name=&value=&source=');
-                    } catch (e) {
-                    }
-                }
-            })
-        </script>
-
-        <!-- END Widget product carousel -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                function instantiateCarousel() {
-                    var carouselConfig = {
-                        visible: 5,
-                        step: 5,
-                        speed: 500,
-                        autoStart: false,
-                        timeOut: 3000
-                    };
-                    $('#product-carousel-banda-live').emgCarousel(carouselConfig);
-                }
-
-                function getCarouselProducts() {
-                    var products = {};
-                    var prodList = new Array();
-                    var i = 0;
-                    $('.emg-carousel-live-prod').each(function () {
-                        prodList[i++] = $(this).attr('id');
-                    });
-                    products.produse = prodList;
-
-                    return products;
-                }
-
-                function updateCarousel() {
-                    var products = getCarouselProducts();
-                }
-
-                function handleCarouselUpdateSuccess(data) {
-                    $('.emg-spinner-wrapper').removeClass('emg-spinner-wrapper').addClass('emg-spinner-pausedClass');
-                    var count = (data.match(/<figure/g) || []).length;
-                    if (count > 0) {
-                        var width = $('#product-carousel-banda-live .emg-carousel-overlay figure').width();
-                        $('#product-carousel-banda-live .emg-carousel-overlay').html(data + $('#product-carousel-banda-live .emg-carousel-overlay').html());
-                        var nrElms = $('#product-carousel-banda-live .emg-carousel-overlay figure').length;
-                        if (nrElms > 40) {
-                            $('#product-carousel-banda-live .emg-carousel-overlay').children().filter(":gt(40)").remove();
-                        }
-                        $('#product-carousel-banda-live .emg-carousel-overlay figure').css('width', width);
-                        $('#product-carousel-banda-live .emg-carousel-overlay').css('margin-left', -(width + 10) * count + 'px');
-                        $('#product-carousel-banda-live .emg-carousel-overlay').animate({marginLeft: '-5px'}, 1000);
-
-                        instantiateCarousel();
-                    }
-                    setTimeout(handleSpinner, 100);
-                }
-
-                function handleSpinner() {
-                    $('.emg-spinner-pausedClass').removeClass('emg-spinner-pausedClass-test').addClass('emg-spinner-wrapper');
-                }
-
-                function prepareCarouselAnimation(liveWidgetInterval) {
-                    $('.emg-live-timer span').html(liveWidgetInterval);
-
-                    $('.emg-spinner-wrapper .emg-spinner-filler').css('animation-duration', liveWidgetInterval + 's');
-                    $('.emg-spinner-wrapper .emg-spinner').css('animation-duration', liveWidgetInterval + 's');
-                    $('.emg-spinner-wrapper .emg-spinner-mask').css('animation-duration', liveWidgetInterval + 's');
-
-                    $('.emg-spinner-wrapper .emg-spinner-filler').css('animation-iteration-count', '1');
-                    $('.emg-spinner-wrapper .emg-spinner').css('animation-iteration-count', '1');
-                    $('.emg-spinner-wrapper .emg-spinner-mask').css('animation-iteration-count', '1');
-
-                    $('.emg-spinner-wrapper .emg-spinner-filler').css('-webkit-animation-duration', liveWidgetInterval + 's');
-                    $('.emg-spinner-wrapper .emg-spinner').css('-webkit-animation-duration', liveWidgetInterval + 's');
-                    $('.emg-spinner-wrapper .emg-spinner-mask').css('-webkit-animation-duration', liveWidgetInterval + 's');
-
-                    $('.emg-spinner-wrapper .emg-spinner-filler').css('-webkit-animation-iteration-count', '1');
-                    $('.emg-spinner-wrapper .emg-spinner').css('-webkit-animation-iteration-count', '1');
-                    $('.emg-spinner-wrapper .emg-spinner-mask').css('-webkit-animation-iteration-count', '1');
-                    $('.emg-spinner-wrapper').removeClass('emg-spinner-wrapper').addClass('emg-spinner-pausedClass');
-
-                    setTimeout(handleSpinner, 100);
-                }
-
-                var liveWidgetInterval = 30; //Interval to get new products (seconds)
-                instantiateCarousel();
-                prepareCarouselAnimation(liveWidgetInterval);
-                setInterval(updateCarousel, (liveWidgetInterval) * 1000);
-
-            });
-        </script>
+        
         <div class="emg-widget-separator">
             <div class="emg-widget-middle-separator"></div>
         </div>
@@ -4160,35 +3543,7 @@
                     <div class="emg-carousel-right"><span class="icon-i29-round-right "></span></div>
                 </div>
                 <!-- END Carousel -->
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#carousel-department-widget-1').emgCarousel(
-                                {
-                                    visible: 1,
-                                    speed: 500,
-                                    autoStart: false,
-                                    timeOut: 3000,
-                                    onChange: function (index) {
-                                        var childs = $(this).find('figure');
-                                        var product = childs.eq(index).find('.gtm-product-details');
-                                        var total = childs.length;
-                                        var position = total - childs.eq(index).nextAll().length;
-
-                                        Emag.DatalayerManager.pushData({
-                                            'ecommerce': {
-                                                'impressions': [{
-                                                    'id': product.val(),
-                                                    'category': product.data('category'),
-                                                    'position': position + '/' + total,
-                                                    'list': 'Widget_' + $(this).parents('.emg-dep').find('h3:first-child').text().replace(/[,\s]/g, '_')
-                                                }]
-                                            }
-                                        });
-                                    }
-                                }
-                        );
-                    });
-                </script>
+                
             </div>
             <div class="emg-clear"></div>
         </section>
@@ -4682,19 +4037,7 @@
             <!-- END Carousel -->
         </section>
         <!-- END Widget product carousel -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#product-carousel-banda-1').emgCarousel(
-                        {
-                            visible: 5,
-                            step: 5,
-                            speed: 500,
-                            autoStart: false,
-                            timeOut: 3000
-                        }
-                );
-            });
-        </script>
+        
         <div class="emg-widget-separator">
             <div class="emg-widget-middle-separator"></div>
         </div>
@@ -5139,35 +4482,7 @@
                     <div class="emg-carousel-right"><span class="icon-i29-round-right "></span></div>
                 </div>
                 <!-- END Carousel -->
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#carousel-department-widget-477').emgCarousel(
-                                {
-                                    visible: 1,
-                                    speed: 500,
-                                    autoStart: false,
-                                    timeOut: 3000,
-                                    onChange: function (index) {
-                                        var childs = $(this).find('figure');
-                                        var product = childs.eq(index).find('.gtm-product-details');
-                                        var total = childs.length;
-                                        var position = total - childs.eq(index).nextAll().length;
-
-                                        Emag.DatalayerManager.pushData({
-                                            'ecommerce': {
-                                                'impressions': [{
-                                                    'id': product.val(),
-                                                    'category': product.data('category'),
-                                                    'position': position + '/' + total,
-                                                    'list': 'Widget_' + $(this).parents('.emg-dep').find('h3:first-child').text().replace(/[,\s]/g, '_')
-                                                }]
-                                            }
-                                        });
-                                    }
-                                }
-                        );
-                    });
-                </script>
+                
             </div>
             <div class="emg-clear"></div>
         </section>
@@ -5507,19 +4822,6 @@
             <!-- END Carousel -->
         </section>
         <!-- END Widget product carousel -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#product-carousel-banda-3').emgCarousel(
-                        {
-                            visible: 5,
-                            step: 5,
-                            speed: 500,
-                            autoStart: false,
-                            timeOut: 3000
-                        }
-                );
-            });
-        </script>
         <div class="emg-widget-separator">
             <div class="emg-widget-middle-separator"></div>
         </div>
@@ -5540,47 +4842,47 @@
                     <ul id="tab1" class="emg-tab-active">
                         <li>
                             <div><a href="/brands/samsung/all-products?ref=hp_brands_1_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/33/images/res_14361012c25248086164c338571081e1.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/33/images/res_14361012c25248086164c338571081e1.png"
                                     alt="Samsung"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/philips/all-products?ref=hp_brands_1_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
                                     alt="Philips"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/chicco/all-products?ref=hp_brands_1_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/702/images/res_0a46082b87f547f844bf2cb2055ce9c3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/702/images/res_0a46082b87f547f844bf2cb2055ce9c3.png"
                                     alt="Chicco"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/bosch/all-products?ref=hp_brands_1_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
                                     alt="BOSCH"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/asus/all-products?ref=hp_brands_1_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/11/images/res_d8f8b9981a3f03efc10aba33297f7217.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/11/images/res_d8f8b9981a3f03efc10aba33297f7217.png"
                                     alt="ASUS"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/Pampers/all-products?ref=hp_brands_1_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1627/images/res_50bbe008f4f2280d8c30c3bcef95a500.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1627/images/res_50bbe008f4f2280d8c30c3bcef95a500.png"
                                     alt="Pampers"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/sony/all-products?ref=hp_brands_1_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/4/images/res_8bb4393b4e05b72565dbe91587ba1703.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/4/images/res_8bb4393b4e05b72565dbe91587ba1703.png"
                                     alt="Sony"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/apple/all-products?ref=hp_brands_1_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/137/images/res_d677d9b968d7a8d3321da73deaf683b4.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/137/images/res_d677d9b968d7a8d3321da73deaf683b4.png"
                                     alt="Apple"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lego/all-products?ref=hp_brands_1_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/736/images/res_deb6f805ae8b80818e5b2141a33e5166.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/736/images/res_deb6f805ae8b80818e5b2141a33e5166.png"
                                     alt="LEGO"></a></div>
                         </li>
                         <li>
@@ -5590,27 +4892,27 @@
                         </li>
                         <li>
                             <div><a href="/brands/lg/all-products?ref=hp_brands_1_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/18/images/res_c5043fac8921b84b582af0ecfa93fc3b.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/18/images/res_c5043fac8921b84b582af0ecfa93fc3b.png"
                                     alt="LG"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/whirlpool/all-products?ref=hp_brands_1_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/75/images/res_a7f9401f00a74235242ce8b3377c23ac.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/75/images/res_a7f9401f00a74235242ce8b3377c23ac.png"
                                     alt="Whirlpool"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/humanitas/all-products?ref=hp_brands_1_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1227/images/res_6ea08d28c3f8812588f9b088970dc58a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1227/images/res_6ea08d28c3f8812588f9b088970dc58a.png"
                                     alt="Humanitas"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lacoste/all-products?ref=hp_brands_1_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/9/8584/images/res_6646fb9fbe1e85cac83382c8ec046ee0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/9/8584/images/res_6646fb9fbe1e85cac83382c8ec046ee0.png"
                                     alt="Lacoste"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/guess/all-products?ref=hp_brands_1_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/8/7804/images/res_7114419dacd9a1d011e1ec941a19fcc3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/8/7804/images/res_7114419dacd9a1d011e1ec941a19fcc3.png"
                                     alt="Guess"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -5618,77 +4920,77 @@
                     <ul id="tab2">
                         <li>
                             <div><a href="/brands/apple/all-products?ref=hp_brands_2_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/137/images/res_d677d9b968d7a8d3321da73deaf683b4.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/137/images/res_d677d9b968d7a8d3321da73deaf683b4.png"
                                     alt="Apple"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/asus/all-products?ref=hp_brands_2_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/11/images/res_d8f8b9981a3f03efc10aba33297f7217.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/11/images/res_d8f8b9981a3f03efc10aba33297f7217.png"
                                     alt="ASUS"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/bosch/all-products?ref=hp_brands_2_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
                                     alt="BOSCH"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/philips/all-products?ref=hp_brands_2_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
                                     alt="Philips"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/dell/all-products?ref=hp_brands_2_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/91/images/res_01a8a5a605a169eeca447099d8ab6c92.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/91/images/res_01a8a5a605a169eeca447099d8ab6c92.png"
                                     alt="Dell"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/heinner/all-products?ref=hp_brands_2_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1578/images/res_48f0fee09fa09b94c588e5a78f257892.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1578/images/res_48f0fee09fa09b94c588e5a78f257892.png"
                                     alt="Heinner"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/whirlpool/all-products?ref=hp_brands_2_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/75/images/res_a7f9401f00a74235242ce8b3377c23ac.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/75/images/res_a7f9401f00a74235242ce8b3377c23ac.png"
                                     alt="Whirlpool"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lenovo/all-products?ref=hp_brands_2_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/201/images/res_4ced6c40e759439108795a401cc3bab7.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/201/images/res_4ced6c40e759439108795a401cc3bab7.png"
                                     alt="Lenovo"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/hewlett_packard/all-products?ref=hp_brands_2_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/3/images/res_b2e48806f69aea01d0a78930c42f18ba.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/3/images/res_b2e48806f69aea01d0a78930c42f18ba.png"
                                     alt="HP"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/western-digital/all-products?ref=hp_brands_2_10"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/5/images/res_e8791d6ad3e312062d65610d14c0b50a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/5/images/res_e8791d6ad3e312062d65610d14c0b50a.png"
                                     alt="WD"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lg/all-products?ref=hp_brands_2_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/18/images/res_c5043fac8921b84b582af0ecfa93fc3b.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/18/images/res_c5043fac8921b84b582af0ecfa93fc3b.png"
                                     alt="LG"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/samsung/all-products?ref=hp_brands_2_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/33/images/res_14361012c25248086164c338571081e1.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/33/images/res_14361012c25248086164c338571081e1.png"
                                     alt="Samsung"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/hotpoint/all-products?ref=hp_brands_2_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/76/images/res_3debf3413418730fc7039e0f5523914f.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/76/images/res_3debf3413418730fc7039e0f5523914f.png"
                                     alt="Hotpoint"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/nikon/all-products?ref=hp_brands_2_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/335/images/res_23fa580f80f5cddb4c6a1cf9e1b3ee6f.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/335/images/res_23fa580f80f5cddb4c6a1cf9e1b3ee6f.png"
                                     alt="Nikon"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/acer/all-products?ref=hp_brands_2_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/62/images/res_a97e7726f0499bf007c4e288d76a1972.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/62/images/res_a97e7726f0499bf007c4e288d76a1972.png"
                                     alt="Acer"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -5696,77 +4998,77 @@
                     <ul id="tab4">
                         <li>
                             <div><a href="/brands/Pampers/all-products?ref=hp_brands_3_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1627/images/res_50bbe008f4f2280d8c30c3bcef95a500.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1627/images/res_50bbe008f4f2280d8c30c3bcef95a500.png"
                                     alt="Pampers"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/bertoni-lorelli/all-products?ref=hp_brands_3_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/5/4100/images/res_ddc4162fc7b24f477f8bc7450a93250c.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/5/4100/images/res_ddc4162fc7b24f477f8bc7450a93250c.png"
                                     alt="Bertoni-Lorelli"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/chicco/all-products?ref=hp_brands_3_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/702/images/res_0a46082b87f547f844bf2cb2055ce9c3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/702/images/res_0a46082b87f547f844bf2cb2055ce9c3.png"
                                     alt="Chicco"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lego/all-products?ref=hp_brands_3_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/736/images/res_deb6f805ae8b80818e5b2141a33e5166.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/736/images/res_deb6f805ae8b80818e5b2141a33e5166.png"
                                     alt="LEGO"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/philips-avent/all-products?ref=hp_brands_3_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/5/4098/images/res_5c800250d5b804b66436be22a428bcc0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/5/4098/images/res_5c800250d5b804b66436be22a428bcc0.png"
                                     alt="Philips-AVENT"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/kinderkraft/all-products?ref=hp_brands_3_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1558/images/res_50ebe51b62ffe224b93a71c2a3afeac1.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1558/images/res_50ebe51b62ffe224b93a71c2a3afeac1.png"
                                     alt="KinderKraft"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/chipolino/all-products?ref=hp_brands_3_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/5/4284/images/res_f96c16e1ffed04b508dc49bc32426bb0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/5/4284/images/res_f96c16e1ffed04b508dc49bc32426bb0.png"
                                     alt="Chipolino"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/pufies/all-products?ref=hp_brands_3_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5793/images/res_08f0f034f17e84493bfe019d02a26697.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5793/images/res_08f0f034f17e84493bfe019d02a26697.png"
                                     alt="Pufies"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/laica/all-products?ref=hp_brands_3_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/5/4258/images/res_6a11cde5adde6985820dc239a350e858.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/5/4258/images/res_6a11cde5adde6985820dc239a350e858.png"
                                     alt="Laica"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/disney/all-products?ref=hp_brands_3_10"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/388/images/res_8a03de96cec0f76f9f8f8cc699cd7fd0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/388/images/res_8a03de96cec0f76f9f8f8cc699cd7fd0.png"
                                     alt="Disney"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/nestle/all-products?ref=hp_brands_3_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/5/4210/images/res_be09cdda161bf322c280b62d43a1b605.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/5/4210/images/res_be09cdda161bf322c280b62d43a1b605.png"
                                     alt="Nestle"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/milupa/all-products?ref=hp_brands_3_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5315/images/res_154fc970264802f0494ead862edc1c7a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5315/images/res_154fc970264802f0494ead862edc1c7a.png"
                                     alt="Milupa"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/graco/all-products?ref=hp_brands_3_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/711/images/res_72757269f528b4fb8d7226a1d7026464.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/711/images/res_72757269f528b4fb8d7226a1d7026464.png"
                                     alt="GRACO"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/bright-starts/all-products?ref=hp_brands_3_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/959/images/res_41544181942cca8476cd9b54e57271fd.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/959/images/res_41544181942cca8476cd9b54e57271fd.png"
                                     alt="Bright Starts"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/organix/all-products?ref=hp_brands_3_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5796/images/res_4e1c47bd4ecc38ffb647c86ac835047d.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5796/images/res_4e1c47bd4ecc38ffb647c86ac835047d.png"
                                     alt="Organix"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -5774,77 +5076,77 @@
                     <ul id="tab5">
                         <li>
                             <div><a href="/brands/einhell/all-products?ref=hp_brands_4_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1567/images/res_584066cdbb3b6df734699c9f61e2b0de.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1567/images/res_584066cdbb3b6df734699c9f61e2b0de.png"
                                     alt="Einhell"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/bosch/all-products?ref=hp_brands_4_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/106/images/res_2a390f13df100559820fb910ca9d5d5b.png"
                                     alt="BOSCH"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/tefal/all-products?ref=hp_brands_4_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/357/images/res_c1dd85f3bebb69acc954f63d49e649c4.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/357/images/res_c1dd85f3bebb69acc954f63d49e649c4.png"
                                     alt="Tefal"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/royal-canin/all-products?ref=hp_brands_4_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5363/images/res_797fc58d3c60c936eb4e4c8a3e53235a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5363/images/res_797fc58d3c60c936eb4e4c8a3e53235a.png"
                                     alt="Royal Canin"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/skil/all-products?ref=hp_brands_4_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1565/images/res_8c641f734708bffde9ebc0ea51089dbb.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1565/images/res_8c641f734708bffde9ebc0ea51089dbb.png"
                                     alt="Skil"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/philips/all-products?ref=hp_brands_4_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
                                     alt="Philips"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/pni/all-products?ref=hp_brands_4_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1605/images/res_515a810c615e585f7ea57f5d76d222a9.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1605/images/res_515a810c615e585f7ea57f5d76d222a9.png"
                                     alt="PNI"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/black_decker/all-products?ref=hp_brands_4_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1507/images/res_e7aca64804732c0e0830f5ea3e057616.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1507/images/res_e7aca64804732c0e0830f5ea3e057616.png"
                                     alt="Black&amp;Decker"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/luminarc/all-products?ref=hp_brands_4_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/12/11487/images/res_23886d04668a5dcde4eafeff304af508.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/12/11487/images/res_23886d04668a5dcde4eafeff304af508.png"
                                     alt="Luminarc"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/michelin/all-products?ref=hp_brands_4_10"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/3/2257/images/res_b07780c4d8101a18fa5babba041b6d4e.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/3/2257/images/res_b07780c4d8101a18fa5babba041b6d4e.png"
                                     alt="Michelin"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/garmin/all-products?ref=hp_brands_4_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/389/images/res_194807d88bc7d1850ef02871a25673c1.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/389/images/res_194807d88bc7d1850ef02871a25673c1.png"
                                     alt="Garmin"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/blaupunkt/all-products?ref=hp_brands_4_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/98/images/res_d0bd64318209eaa99aff70cce9c207d3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/98/images/res_d0bd64318209eaa99aff70cce9c207d3.png"
                                     alt="Blaupunkt"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/castrol/all-products?ref=hp_brands_4_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/10/9081/images/res_dbc162be06ff3cfb8b21f770f1ffac93.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/10/9081/images/res_dbc162be06ff3cfb8b21f770f1ffac93.png"
                                     alt="Castrol"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/stanley/all-products?ref=hp_brands_4_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1648/images/res_dda2d075ea47142a261fde238812d675.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1648/images/res_dda2d075ea47142a261fde238812d675.png"
                                     alt="Stanley"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/whiskas/all-products?ref=hp_brands_4_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5300/images/res_73a8e2dd46e567cf1c97db4aa05bd67c.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5300/images/res_73a8e2dd46e567cf1c97db4aa05bd67c.png"
                                     alt="Whiskas"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -5852,77 +5154,77 @@
                     <ul id="tab6">
                         <li>
                             <div><a href="/brands/nivea/all-products?ref=hp_brands_5_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5428/images/res_50e18526a21f517e5a3a7f1a5814d61e.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5428/images/res_50e18526a21f517e5a3a7f1a5814d61e.png"
                                     alt="Nivea"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/calvin-klein/all-products?ref=hp_brands_5_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/9/8580/images/res_61eb83bafc494500937ce0af2c2295f7.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/9/8580/images/res_61eb83bafc494500937ce0af2c2295f7.png"
                                     alt="Calvin Klein"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/scholl/all-products?ref=hp_brands_5_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/9/8654/images/res_2403e01250582ccd86881981c3a3dfb0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/9/8654/images/res_2403e01250582ccd86881981c3a3dfb0.png"
                                     alt="Scholl"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/max-factor/all-products?ref=hp_brands_5_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5717/images/res_a3edc3a93e8f197246b28a7b22b5f646.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5717/images/res_a3edc3a93e8f197246b28a7b22b5f646.png"
                                     alt="Max Factor"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/philips/all-products?ref=hp_brands_5_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/34/images/res_666907487441c428e95abc091180d015.png"
                                     alt="Philips"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/l-oreal-paris/all-products?ref=hp_brands_5_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5216/images/res_3801f274b45f1ae074dfe716c3afe95f.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5216/images/res_3801f274b45f1ae074dfe716c3afe95f.png"
                                     alt="L'Oreal Paris"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/braun/all-products?ref=hp_brands_5_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/427/images/res_428912a9adf2d248d8e5a53a72521ae6.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/427/images/res_428912a9adf2d248d8e5a53a72521ae6.png"
                                     alt="Braun"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/givenchy/all-products?ref=hp_brands_5_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/8/7643/images/res_316636205493fe6bde3f0b0654e8531e.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/8/7643/images/res_316636205493fe6bde3f0b0654e8531e.png"
                                     alt="Givenchy"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/rowenta/all-products?ref=hp_brands_5_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/359/images/res_2826e6748e34c86e8619f7f7564ed6d1.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/359/images/res_2826e6748e34c86e8619f7f7564ed6d1.png"
                                     alt="Rowenta"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/little-mistress/all-products?ref=hp_brands_5_10"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/29/28620/images/res_5661b9f73fd0dd45d10b3655bcf8fdd0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/29/28620/images/res_5661b9f73fd0dd45d10b3655bcf8fdd0.png"
                                     alt="Little Mistress"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/yvy-bags/all-products?ref=hp_brands_5_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/29/28576/images/res_64c3ee91840fb4d882357e6cffcdfe74.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/29/28576/images/res_64c3ee91840fb4d882357e6cffcdfe74.png"
                                     alt="Yvy Bags"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/menbur/all-products?ref=hp_brands_5_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/29/28615/images/res_0553749ff0692daa64f930eac46ef121.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/29/28615/images/res_0553749ff0692daa64f930eac46ef121.png"
                                     alt="Menbur"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/lacoste/all-products?ref=hp_brands_5_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/9/8584/images/res_6646fb9fbe1e85cac83382c8ec046ee0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/9/8584/images/res_6646fb9fbe1e85cac83382c8ec046ee0.png"
                                     alt="Lacoste"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/guess/all-products?ref=hp_brands_5_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/8/7804/images/res_7114419dacd9a1d011e1ec941a19fcc3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/8/7804/images/res_7114419dacd9a1d011e1ec941a19fcc3.png"
                                     alt="Guess"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/nissa/all-products?ref=hp_brands_5_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/36/35595/images/res_540aa7c732e1349811d17feea1b80c04.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/36/35595/images/res_540aa7c732e1349811d17feea1b80c04.png"
                                     alt="NISSA"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -5930,77 +5232,77 @@
                     <ul id="tab7">
                         <li>
                             <div><a href="/brands/litera/all-products?ref=hp_brands_6_1"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1276/images/res_060c98efe0a7a4bc7fd92dc8b5f4a0d4.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1276/images/res_060c98efe0a7a4bc7fd92dc8b5f4a0d4.png"
                                     alt="Litera"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/trei/all-products?ref=hp_brands_6_2"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1455/images/res_2bcf2bfeda33495b7dcda3ae174415b3.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1455/images/res_2bcf2bfeda33495b7dcda3ae174415b3.png"
                                     alt="Trei"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/corint/all-products?ref=hp_brands_6_3"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1100/images/res_86ad90c8ecd414d0ba1e9a44fe29b8c8.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1100/images/res_86ad90c8ecd414d0ba1e9a44fe29b8c8.png"
                                     alt="Corint"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/rao/all-products?ref=hp_brands_6_4"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1385/images/res_0479607a7fc20f9eccdeb0a7e6479656.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1385/images/res_0479607a7fc20f9eccdeb0a7e6479656.png"
                                     alt="Rao"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/humanitas/all-products?ref=hp_brands_6_5"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1227/images/res_6ea08d28c3f8812588f9b088970dc58a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1227/images/res_6ea08d28c3f8812588f9b088970dc58a.png"
                                     alt="Humanitas"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/nemira/all-products?ref=hp_brands_6_6"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1325/images/res_942381f05fa6a53524a83c54015cef6a.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1325/images/res_942381f05fa6a53524a83c54015cef6a.png"
                                     alt="Nemira"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/curtea-veche/all-products?ref=hp_brands_6_7"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/2/1111/images/res_c981764b296008e2713777a808ddb971.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/2/1111/images/res_c981764b296008e2713777a808ddb971.png"
                                     alt="Curtea Veche"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/universal/all-products?ref=hp_brands_6_8"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/680/images/res_5f81f4248e1184a8290685a2f3e05951.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/680/images/res_5f81f4248e1184a8290685a2f3e05951.png"
                                     alt="Universal"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/disney/all-products?ref=hp_brands_6_9"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/388/images/res_8a03de96cec0f76f9f8f8cc699cd7fd0.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/388/images/res_8a03de96cec0f76f9f8f8cc699cd7fd0.png"
                                     alt="Disney"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/nike/all-products?ref=hp_brands_6_10"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/6/5991/images/res_5f8439ec7d7af122b922751424970086.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/6/5991/images/res_5f8439ec7d7af122b922751424970086.png"
                                     alt="Nike"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/isostar/all-products?ref=hp_brands_6_11"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/10/9442/images/res_5e98c2f882772cdfe0befb8cc17998cf.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/10/9442/images/res_5e98c2f882772cdfe0befb8cc17998cf.png"
                                     alt="ISOSTAR"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/kettler/all-products?ref=hp_brands_6_12"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/1/730/images/res_97605f97dc63fbddda58d70bb7585c70.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/1/730/images/res_97605f97dc63fbddda58d70bb7585c70.png"
                                     alt="Kettler"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/felt/all-products?ref=hp_brands_6_13"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/10/9440/images/res_e68c000b44469f5099c3daaa43e6ea90.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/10/9440/images/res_e68c000b44469f5099c3daaa43e6ea90.png"
                                     alt="Felt"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/pinguin/all-products?ref=hp_brands_6_14"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/10/9333/images/res_bc6855e2f8648e6317fb4df273199843.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/10/9333/images/res_bc6855e2f8648e6317fb4df273199843.png"
                                     alt="Pinguin"></a></div>
                         </li>
                         <li>
                             <div><a href="/brands/scott/all-products?ref=hp_brands_6_15"><img
-                                    data-src="https://s0emagst.akamaized.net//storage/brands/10/9550/images/res_5a0a58de4641100db5b50bdebb64d7aa.png"
+                                    src="https://s0emagst.akamaized.net//storage/brands/10/9550/images/res_5a0a58de4641100db5b50bdebb64d7aa.png"
                                     alt="Scott"></a></div>
                         </li>
                         <div class="emg-clear"></div>
@@ -6554,15 +5856,6 @@
 
         </section>
         <!-- END Widget navigation history -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#emg-recent-history').emgTabbed(
-                        {
-                            isHistory: true
-                        }
-                );
-            });
-        </script>
     </div>
 
     <div class="emg-clear"></div>
@@ -6728,191 +6021,9 @@
         </div>
     </footer>
     <div class="emg-clear"></div>
-    <!-- END Footer -->
-
-    <script type="text/javascript">
-        if ($.cookie("_rsv") == null) {
-            var rsv = 1;
-        } else {
-            var rsv = eval($.cookie("_rsv")) + 1;
-        }
-        $.cookie("_rsv", rsv, {expires: 1, path: "/"});
-
-        if ($.cookie("_rsv") >= 2) {
-            $.cookie("_rscd", 1, {expires: 1, path: "/"});
-        }
-
-        if ($.cookie("_rsv") != null) {
-            var rsdc = eval($.cookie("_rscd")) + 1;
-            $.cookie("_rsdc", rsdc, {expires: 3, path: "/"});
-        }
-
-        $(window).load(function () {
-            if (typeof(GUI) !== "object") {
-                $.getScript("http://www.emag.ro/resources/js/plugins/gui.min.js");
-            }
-            else {
-                $(document).trigger('gui-init');
-            }
-            try {
-                $.postLogin();
-            } catch (e) {
-                console.info('PostLogin not defined');
-            }
-        });
-    </script>
+    <!-- END Footer --> 
 
 
-    <script type="text/javascript">
-        var emgContainer = $('.emg-container:last'),
-                footer = $('footer');
-        writeNotifications({"1": [], "2": [], "3": [], "4": [], "5": []});
-
-        var boxHistory = false;
-
-
-    </script>
-    <script>
-        window.nrlskOnEvent = function (padiact) {
-            if (padiact.type == 'open') {
-                if (padiact.id == 9272) {
-
-                    $('<link rel="stylesheet" href="/resources/css/padiact/ro/' + padiact.id + '.css" type="text/css" />').appendTo('head');
-
-                    if ($('.padiFormWrap ul').length > 0) {
-                        // Get Exising Select Options
-                        $('.padiFormWrap ul').each(function (i, ul) {
-                            var $ul = $(ul);
-                            var $p = $("<p/>");
-                            $ul.find('label').each(function (j, label) {
-                                var $label = $(label);
-                                if ($label.hasClass("padiLabel")) {
-                                    $p.append("<label class='padiLabel'><span>" + $label.text() + "</span></label>");
-                                }
-                                else {
-                                    // Create a radio:
-                                    var $checkbox = $('<input type="checkbox" />');
-                                    // Set name and value:
-                                    $checkbox.attr({
-                                        name: $label.children(":first").attr('name'),
-                                        id: $label.children(":first").attr('id'),
-                                        value: $label.children(":first").attr('value')
-                                    });
-                                    // Insert radio before select box:
-                                    $p.append($checkbox);
-                                    // Insert a label:
-                                    $p.append(
-                                            $("<label class='optionLabel'/>").attr('for', $checkbox.attr('id')).text($label.text())
-                                    );
-                                }
-                            });
-                            $ul.before($p);
-                            $ul.remove();
-                        });
-                    }
-                }
-
-                else {
-                    $('<link rel="stylesheet" href="/resources/css/padiact/ro/' + padiact.id + '.css" type="text/css" />').appendTo('head');
-
-                    if ($('.padiFormWrap select').length > 0) {
-                        //Get Exising Select Options
-                        $('.padiFormWrap select').each(function (i, select) {
-                            var $select = $(select);
-                            $select.find('option').each(function (j, option) {
-                                var $option = $(option);
-                                // Create a radio:
-                                var $radio = $('<input type="radio" id="' + j + '"/>');
-                                // Set name and value:
-                                $radio.attr('name', $select.attr('name')).attr('value', $option.val());
-                                // Insert radio before select box:
-                                $select.before($radio);
-                                // Insert a label:
-                                $select.before(
-                                        $("<label class='optionLabel'/>").attr('for', $radio.attr('id')).text($option.text())
-                                );
-                            });
-                            $select.remove();
-                        });
-                    }
-                }
-            }
-        }
-    </script>
-    <script type="text/javascript">var datePicker = '{"clearText": "Curat","clearStatus": "Sterge data curenta","closeText": "Inchide","closeStatus": "Inchide fara schimbare","prevText": "&#x3c; Anterior","prevStatus": "Arata luna trecuta","prevBigText": "&#x3c;&#x3c;","prevBigStatus": "","nextText": "Urmator &#x3e;","nextStatus": "Arata luna urmatoare","nextBigText": "&#x3e;&#x3e;","nextBigStatus": "","currentText": "Azi","currentStatus": "Arata luna curenta","monthNames": [ "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],"monthNamesShort": [ "Ian", "Feb", "Mar", "Apr", "Mai", "Iun", "Iul", "Aug", "Sep", "Oct", "Noi", "Dec"],"monthStatus": "Arata o luna diferita","yearStatus": "Arata un an diferit","weekHeader": "Sapt","weekStatus": "Saptamana anului","dayNames": [ "Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"],"dayNamesShort": [ "Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sam"],"dayNamesMin": [ "Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sa"],"dayStatus": "Seteaza DD ca prima saptamana zi","dateStatus": "Selecteaza D, M d","dateFormat": "dd-mm-yy","firstDay": 1,"showAnim": "slideDown","initStatus": "Selecteaza o data","isRTL": false}';</script>
-
-
-    <script type="text/javascript">
-        function get_browser_version() {
-            var N = navigator.appName, ua = navigator.userAgent, tem;
-            var M = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-            if (M && (tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
-            M = M ? [M[1], M[2]] : [N, navigator.appVersion, '-?'];
-            return parseInt(M[1]);
-        }
-        $(document).ready(function () {
-            if ($.cookie('oldBrowserIHaveBeenWarned') != 'yes' && (($.browser.msie && get_browser_version() < 9) || ($.browser.mozilla && get_browser_version() < 3))) {
-                $.blockUI({
-                    'message': $('#compatibility-popup'),
-                    'css': {
-                        'cursor': 'auto',
-                        'height': '407px',
-                        'width': '491px',
-                        'textAlign': 'left',
-                        'border': 'none',
-                        'backgroundColor': 'none',
-                        'zIndex': 9998,
-                        'top': '50%',
-                        'marginTop': '-203px'
-                    },
-                    'overlayCSS': {
-                        'cursor': 'auto',
-                        'backgroundColor': '#e8e8e8',
-                        'opacity': 0.9,
-                        'zIndex': 9998
-                    }
-                });
-                window.closePopUp = function () {
-                    $.unblockUI();
-                    return false;
-                }
-
-                $('.close-old-warning').on('click', function (e) {
-                    $.cookie('oldBrowserIHaveBeenWarned', 'yes');
-                    closePopUp();
-                });
-                $('.blockUI.blockOverlay').click(function () {
-                    $.cookie('oldBrowserIHaveBeenWarned', 'yes');
-                });
-            }
-        });
-    </script>
-
-    <script>
-
-        $(document).ready(function () {
-            window.resetEmgSlider = function (slides) {
-                emgSlideObj = [];
-                for (var i = 1; i <= slides; i++) {
-                    emgSlideObj.push(i);
-                }
-                $('.emg-menu-container .emg-slider').attr('data-n', slides);
-                $('.emg-menu-container .emg-slider').html('<div class="emg-slider-picture" id="emg-slider-picture1" style="display: none;"><a href="http://www.emag.ro/cmp/back-to-school-2016?vt_campaign=1002718&amp;vt_content=10003544#ref=1002718_enAX4w71_10003544"><img src="/index_files/upload.3OCpKzpRm2F5.jpg" style=""></a></div><div class="emg-slider-picture" id="emg-slider-picture2" style="display: none;"><a href="http://www.emag.ro/cmp/back-to-school-2016/?vt_campaign=1002785&amp;vt_content=10003641#ref=1002785_EyirKkbP_10003641"><img src="/index_files/upload.99onspTrkhaK.jpg" style=""></a></div><div class="emg-slider-picture" id="emg-slider-picture3" style="display: none;"><a href="http://www.emag.ro/cmp/cooking-days/?vt_campaign=1002820&amp;vt_content=10003692#ref=1002820_xZ42NOKJ_10003692"><img src="/index_files/upload.mAw1iDxddWLG.jpg" style=""></a></div><div class="emg-slider-picture" id="emg-slider-picture4" style="display: none;"><a href="http://www.emag.ro/campaign/apple-bts?vt_campaign=1002779&amp;vt_content=10003630#ref=1002779_1IXy0mjZ_10003630"><img src="/index_files/upload.bCi9zRmQSqe9.jpg" style=""></a></div><div class="emg-slider-picture" id="emg-slider-picture5" style="display: none;"><a href="http://www.emag.ro/campaign/fashion-cu-accesorii-ideale-obtii-tinute-senzationale?vt_campaign=1002862&amp;vt_content=10003759#ref=1002862_FxYjdI63_10003759"><img src="/index_files/upload.3F6Epau9umnb.jpg" style=""></a></div><div class="emg-slider-picture" id="emg-slider-picture6" style="display: block;"><a href="http://www.emag.ro/promo_canon--promo10689875?pc=24&amp;vt_campaign=1002877&amp;vt_content=10003786#ref=1002877_0EXTfVtL_10003786"><img src="/index_files/upload.7aM3yrWa9u4L.jpg" style=""></a></div>');
-
-                clearInterval(window.globalSliderIntervalId);
-                $('#emg-mega-menu').emgMegaMenu(
-                        {
-                            autoOpen: $('header.emg-auto-open').length ? true : false,
-                            activeItem: false,
-                            slider: $('.emg-slider').length ? true : false,
-                            fixed: $('.emg-sticky-menu-fixed').length ? true : false,
-                            transitionDelay: 150
-                        });
-            };
-
-            window.resetEmgSlider(6);
-        });
-    </script>
 
 </div>
 
