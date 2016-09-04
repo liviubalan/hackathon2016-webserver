@@ -27,7 +27,6 @@ app.controller('HomeController', function ($scope, $http) {
     // });
 
     loadScript("index_files/homepage.js");
-    loadScript("index_files/custom-select.js");
 });
 
 app.controller('ProductController', function ($scope, $http, $route, $routeParams) {
@@ -42,11 +41,7 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
 
     for (var res in resorcesToLoad) {
         requestData("product/" + $routeParams.part_number + "/" + resorcesToLoad[res][0] + "." + resorcesToLoad[res][1]).then(function (data) {
-            if (resorcesToLoad[res][1] == 'json') {
-                $scope.data = angular.fromJson(data);
-            } else {
-                $scope.data = data;
-            }
+            $scope.data = data;
         }, function (err) {
             var responsePromise = $http.get('http://api.hack1.smart-things.ro/' + err.resource);
             responsePromise.success(function (data, status, headers, config) {
@@ -55,11 +50,7 @@ app.controller('ProductController', function ($scope, $http, $route, $routeParam
                 fileName = fileName.split(".");
                 var last = fileName[0];
                 var ext = fileName[1];
-                if (ext == 'json') {
-                    $scope[last] = angular.fromJson(data);
-                } else {
-                    $scope[last] = data;
-                }
+                $scope[last] = data;
                 saveData(err.resource, data);
             });
             responsePromise.error(function (data, status, headers, config) {
