@@ -70,9 +70,18 @@ app.controller('HomeController',['$scope', '$http', '$sce', '$routeParams',
             });
         }
 
+        $scope.totalPeerConnections = totalPeerConnections || 0;
+        socket.on('update', function (data) {
+            $scope.$apply(function() {
+                $scope.totalPeerConnections = data.peer_list.length;
+            });
+        });
 
-
-
+        socket.on('news', function (data) {
+            $scope.$apply(function() {
+                $scope.totalPeerConnections = data.peer_list.length;
+            });
+        });
     }]
 );
     // var responsePromise = $http.get("https://sapi.emag.ro/products/DVBTMMBBM?source_id=7");
